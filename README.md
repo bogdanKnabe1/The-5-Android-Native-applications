@@ -20,7 +20,7 @@
   - Insert more social links here.
   ---
 
-  ## Donations (Optional)
+  ## Donations
 
   [![Support via Gratipay](https://lh3.googleusercontent.com/FZc95BN57EpF2FOL2JDLaRQ1H2ibGnRVbvAY_F6sja-C8_q1qQGCXZYcNTjTZi7ZISE=s180-rw)](https://www.donationalerts.com/r/ninpou_u)
   ---
