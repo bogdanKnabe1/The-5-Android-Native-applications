@@ -15,9 +15,8 @@
 
   Reach out to me at one of the following places!
 
-  - Website at <a href="https://t.me/NinpoU_u" target="_blank">`My telegramm`</a>
+  - Telegram at <a href="https://t.me/NinpoU_u" target="_blank">`My telegramm`</a>
   - Twitter at <a href="https://twitter.com/Bogdan21724971" target="_blank">`@NinpoU_u`</a>
-  - Insert more social links here.
   ---
 
   ## Donations
