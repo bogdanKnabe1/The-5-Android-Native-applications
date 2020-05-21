@@ -1,8 +1,8 @@
 
   ![ttystudio GIF](https://media.giphy.com/media/llarwdtFqG63IlqUR1/giphy.gif)
 
-  # 6-Android-Native-Applications
-  > The 6 Android Native applications with out any external libraries. Using vanilla java and android SDK.
+  # 4-Android-Native-Applications
+  > The 4 Android Native applications with out any external libraries. Using vanilla java and android SDK.
 
   |  #  |            Project             | STATUS |
   | :-: | :----------------------------: | :-------: |
