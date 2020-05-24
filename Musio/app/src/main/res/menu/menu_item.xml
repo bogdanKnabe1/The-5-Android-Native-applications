@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+   <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/albumsId"
+        android:title="Albums" />
+    <item
+        android:id="@+id/songId"
+        android:title="Songs"/>
+
+    <item
+       android:id="@+id/musicId"
+       android:title="Music"/>
+
+    <item
+        android:id="@+id/settingsId"
+        android:title="Settings"/>
+
+   </group>
+
+    <item android:title="">
+        <menu>
+            <item android:id="@+id/rulesID"
+                android:title="Rules and Privacy Policy">
+            </item>
+            <item android:id="@+id/supportID"
+                android:title="Support">
+            </item>
+            <item android:id="@+id/logoutID"
+                android:title="Logout">
+            </item>
+        </menu>
+
+    </item>
+</menu>
