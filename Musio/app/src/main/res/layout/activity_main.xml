@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:id="@+id/drawerCore"
     tools:openDrawer="end">
 
@@ -14,6 +15,19 @@
         android:id="@+id/container"
         android:background="@android:color/white">
 
+
+
+        <!--MAIN SCROLL-->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
 
         <!--TOOLBAR-->
         <RelativeLayout
@@ -46,19 +60,6 @@
 
         </RelativeLayout>
 
-
-        <!--MAIN SCROLL-->
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/nav_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-        </FrameLayout>
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="0dp"
@@ -67,6 +68,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@color/colorIconBottomNav"
             app:menu="@menu/bottom_nav_menu" />
 
         <!-- Your content goes here -->

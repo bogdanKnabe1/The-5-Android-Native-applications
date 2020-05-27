@@ -8,10 +8,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.musio.R;
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Make fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         //INIT
@@ -43,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //set toolbar
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         //toggle drawer
-        toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawerOpen,R.string.drawerClose);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout,toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
@@ -56,11 +63,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(Gravity.LEFT);
             }
         });
+
+        //set icon and toolbar settings
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+
         navigationView.setNavigationItemSelectedListener(this);
+
 
         //Navigation bottom menu
         BottomNavigationView bottomNav = findViewById(R.id.nav_view);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        Fragment fragment = new HomeFragment();
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+
+        }
 
     }
 
@@ -102,10 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         case R.id.nav_homeProfile:
                             selectedFragment = new HomeFragment();
                             break;
-                        case R.id.nav_albums:
+                        case R.id.nav_player:
                             selectedFragment = new AlbumFragment();
                             break;
-                        case R.id.nav_songs:
+                        case R.id.nav_bell:
                             selectedFragment = new SongsFragment();
                             break;
                         case R.id.nav_find_song:
