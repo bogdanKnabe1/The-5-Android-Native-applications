@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     android:id="@+id/drawerCore"
     tools:openDrawer="end">
 
@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:id="@+id/container"
         android:background="@android:color/white">
-
-
 
         <!--MAIN SCROLL-->
         <FrameLayout
@@ -34,6 +32,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,18 +44,18 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:background="@android:color/transparent">
-
             </androidx.appcompat.widget.Toolbar>
 
-            <TextView
-                android:id="@+id/logo_toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:text="Musio"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:gravity="center"/>
+            <!--<TextView
+            android:id="@+id/logo_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:text="Musio"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="34sp"
+            android:gravity="center"/>-->
 
         </RelativeLayout>
 
@@ -79,7 +78,7 @@
         android:id="@+id/drawer_navigation_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
+        android:layout_marginTop="22dp"
         app:menu="@menu/menu_item"
         app:headerLayout="@layout/drawer_header"
         android:theme="@style/NavigationDrawerStyle"
