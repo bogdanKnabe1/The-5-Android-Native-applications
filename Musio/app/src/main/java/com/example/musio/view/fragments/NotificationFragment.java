@@ -13,18 +13,16 @@ import com.example.musio.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlbumFragment extends Fragment {
+public class NotificationFragment extends Fragment {
 
-    public AlbumFragment() {
+    public NotificationFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_album, container, false); // Inflate the layout for this fragment
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_notifications, container, false); // Inflate the layout for this fragment
 
 
 

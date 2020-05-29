@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,12 @@
     tools:context=".view.fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/firstPart"
         android:layout_width="match_parent"
-        android:layout_height="320dp">
+        android:layout_height="320dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,15 +30,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="// TRENDING"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
+            android:text="// TRENDING"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.20">
+            app:layout_constraintVertical_bias="0.18">
         </TextView>
 
         <TextView
@@ -42,10 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:maxWidth="220dp"
+            android:maxWidth="290dp"
             android:text="@string/name_of_track"
             android:textColor="@android:color/white"
-            android:textSize="22sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +77,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="40dp"
-            android:text="PLAY"
-            android:padding="8dp"
-            android:drawableStart="@drawable/ic_play_rounded_btn"
-            android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/btn_rounded"
+            android:drawableStart="@drawable/ic_play_rounded_btn"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:text="PLAY"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -88,15 +93,76 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="40dp"
-            android:padding="12dp"
-            android:drawableStart="@drawable/ic_share"
             android:background="@drawable/btn_rounded"
+            android:drawableStart="@drawable/ic_share"
+            android:elevation="8dp"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/button">
 
         </Button>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="Featured Tracks"
+        android:textColor="#0F1E36"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstPart">
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/secondPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/featuredRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Tracks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#0F1E36"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp">
+        </TextView>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/TopChartRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
