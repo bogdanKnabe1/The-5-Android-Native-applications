@@ -7,6 +7,11 @@
         android:title="Home" />
 
     <item
+        android:id="@+id/nav_album"
+        android:icon="@drawable/ic_albums"
+        android:title="Albums" />
+
+    <item
         android:id="@+id/nav_player"
         android:icon="@drawable/ic_player"
         android:title="Player" />
@@ -15,11 +20,6 @@
         android:id="@+id/nav_find_song"
         android:icon="@drawable/ic_find"
         android:title="Find" />
-
-    <item
-        android:id="@+id/nav_bell"
-        android:icon="@drawable/ic_bell"
-        android:title="Songs" />
 
 
 </menu>

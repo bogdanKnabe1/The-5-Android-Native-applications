@@ -19,7 +19,7 @@ import com.example.musio.R;
 import com.example.musio.view.fragments.MusicPlayerFragment;
 import com.example.musio.view.fragments.FindNewSongFragment;
 import com.example.musio.view.fragments.HomeFragment;
-import com.example.musio.view.fragments.NotificationFragment;
+import com.example.musio.view.fragments.AlbumFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         case R.id.nav_find_song:
                             selectedFragment = new FindNewSongFragment();
                             break;
-                        case R.id.nav_bell:
-                            selectedFragment = new NotificationFragment();
+                        case R.id.nav_album:
+                            selectedFragment = new AlbumFragment();
                             break;
                     }
 
