@@ -19,6 +19,12 @@ import android.widget.Toast;
 
 import com.example.musio.R;
 import com.example.musio.adapter.SongListAdapter;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,14 +43,12 @@ public class AlbumFragment extends Fragment {
     private ArrayList<String> musics;
     private SongListAdapter songListAdapter;
     private String[] songs;
-    //private static RecyclerViewClickListener itemListener;
 
     public AlbumFragment() {
         // Required empty public constructor
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,18 +68,20 @@ public class AlbumFragment extends Fragment {
 
         File[] files = file.listFiles();
 
-        for(File singleFile: Objects.requireNonNull(files)){
+        for(File singleFile: (Objects.requireNonNull(files))){
             if(singleFile.isDirectory() && !singleFile.isHidden()){
                 musicLists.addAll(findMusics(singleFile));
             }else{
-                if(singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".m4a") || singleFile.getName().endsWith(".wav") || singleFile.getName().endsWith(".m4b")){
+                if(singleFile.getName().endsWith(".mp3") ||
+                        singleFile.getName().endsWith(".m4a") ||
+                        singleFile.getName().endsWith(".wav") ||
+                        singleFile.getName().endsWith(".m4b")) {
+
                     musicLists.add(singleFile);
                 }
             }
         }
-
         return musicLists;
-
     }
 
 
@@ -98,7 +104,6 @@ public class AlbumFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL));
         songListAdapter = new SongListAdapter(requireActivity(), (ArrayList<String>) songList);
         recyclerView.setAdapter(songListAdapter);
-
     }
 
     /*@Override

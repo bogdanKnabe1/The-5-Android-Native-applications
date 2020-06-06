@@ -60,12 +60,8 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.MyView
                     //Intent to music player
                     Intent play = new Intent(getContext(), Player.class);
 
-                    //Convert to array
-                    String[] allSongs = new String[musicList.size()];
-                    allSongs = musicList.toArray(allSongs);
-
                     //put into intent data
-                    play.putExtra("songs", allSongs).putExtra("songName",songName).putExtra("position", position);
+                    play.putExtra("songs", musicList).putExtra("songName",songName).putExtra("position", position);
                     getContext().startActivity(play);
                 }
             });
