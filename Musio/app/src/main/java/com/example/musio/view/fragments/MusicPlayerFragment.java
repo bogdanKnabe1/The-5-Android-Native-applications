@@ -53,7 +53,7 @@ public class MusicPlayerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_albums, container, false); // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_music_player, container, false); // Inflate the layout for this fragment
 
 
 

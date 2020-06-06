@@ -7,20 +7,25 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.musio.R;
+import com.example.musio.adapter.SongListAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,8 +35,9 @@ public class AlbumFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<String> musics;
-    private ArrayAdapter<String> mArrayAdapter;
+    private SongListAdapter songListAdapter;
     private String[] songs;
+    //private static RecyclerViewClickListener itemListener;
 
     public AlbumFragment() {
         // Required empty public constructor
@@ -42,7 +48,7 @@ public class AlbumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_music_player, container, false); // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_albums, container, false); // Inflate the layout for this fragment
 
         //init
         recyclerView = v.findViewById(R.id.musicRecyclerView);
@@ -75,32 +81,34 @@ public class AlbumFragment extends Fragment {
 
     private void display(){
 
-        /*final ArrayList<File> allSongs = findMusics(Environment.getExternalStorageDirectory());
+        final ArrayList<File> allSongs = findMusics(Environment.getExternalStorageDirectory());
         songs = new String[allSongs.size()];
 
-        for(int i=0;i<allSongs.size();i++){
-            songs[i] = allSongs.get(i).getName().replace(".mp3","").replace(".m4a","").replace(".wav","").replace(".m4b","");
+        for(int i = 0; i < allSongs.size(); i++){
+            songs[i] = allSongs.get(i).getName()
+                    .replace(".mp3","")
+                    .replace(".m4a","")
+                    .replace(".wav","")
+                    .replace(".m4b","");
         }
 
+        List<String> songList = Arrays.asList(songs);
 
-        mArrayAdapter = new ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1,songs);
-        recyclerView.setAdapter(mArrayAdapter);
-
-        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // start music player when song name is clicked
-
-                String songName = mListView.getItemAtPosition(position).toString();
-                Intent play = new Intent(getActivity(),Player.class);
-                play.putExtra("songs",allSongs).putExtra("songName",songName).putExtra("position",position);
-                startActivity(play);
-            }
-        });*/
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL));
+        songListAdapter = new SongListAdapter(requireActivity(), (ArrayList<String>) songList);
+        recyclerView.setAdapter(songListAdapter);
 
     }
 
+    /*@Override
+    public void recyclerViewListClicked(View v, int position) {
+        // start music player when song name is clicked
+        String songName = songListAdapter.getItemAtPosition(position).toString();
+        Intent play = new Intent(getActivity(), Player.class);
+        play.putExtra("songs", allSongs).putExtra("songName",songName).putExtra("position",position);
+        startActivity(play);
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {

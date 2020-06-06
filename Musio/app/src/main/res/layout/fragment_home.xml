@@ -111,7 +111,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="Featured Tracks"
-        android:textColor="#0F1E36"
+        android:textColor="@color/colorHeader"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +147,7 @@
             android:text="Top Tracks"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#0F1E36"
+            android:textColor="@color/colorHeader"
             android:layout_marginTop="20dp"
             android:layout_marginStart="16dp">
         </TextView>
