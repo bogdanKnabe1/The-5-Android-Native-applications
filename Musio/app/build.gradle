@@ -47,11 +47,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
 
+    //Iamge processing/download
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //Circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    //Dexter for example permissions
-    implementation 'com.karumi:dexter:5.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -16,10 +18,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.musio.R;
+import com.example.musio.view.fragments.AlbumFragment;
 import com.example.musio.view.fragments.MusicPlayerFragment;
 import com.example.musio.view.fragments.FindNewSongFragment;
 import com.example.musio.view.fragments.HomeFragment;
-import com.example.musio.view.fragments.AlbumFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+
+    private HomeFragment homeFragment = new HomeFragment();
+    private AlbumFragment albumFragment = new AlbumFragment();
+    private MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
+    private FindNewSongFragment findNewSongFragment  = new FindNewSongFragment();
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -82,19 +89,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //Navigation bottom menu
-        BottomNavigationView bottomNav = findViewById(R.id.nav_view);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        BottomNavigationView bottomNav = findViewById(R.id.nav_view);;
+        setFragment(homeFragment);
+        bottomNav.setOnNavigationItemSelectedListener(item -> {
+            if (item.isChecked()){
+                return true;
+            } else {
+                switch (item.getItemId()) {
+                    case R.id.nav_album:
+                        setFragment(albumFragment);
+                        return true;
+                    case R.id.nav_player:
+                        setFragment(musicPlayerFragment);
+                        return true;
+                    case R.id.nav_find_song:
+                        setFragment(findNewSongFragment);
+                        return true;
+                    case R.id.nav_homeProfile:
+                    default:
+                        setFragment(homeFragment);
+                        return true;
+                }
+            }
+        });
 
-        Fragment fragment = new HomeFragment();
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+    }
 
-        }
-
-
+    public void setFragment(Fragment fragment){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, fragment);
+        ft.commit();
     }
 
     // Navigation drawer
@@ -124,35 +148,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    //bottom navigation menu
-    BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-
-                    switch (item.getItemId()) {
-                        case R.id.nav_homeProfile:
-                            selectedFragment = new HomeFragment();
-                            break;
-                        case R.id.nav_player:
-                            selectedFragment = new MusicPlayerFragment();
-                            break;
-                        case R.id.nav_find_song:
-                            selectedFragment = new FindNewSongFragment();
-                            break;
-                        case R.id.nav_album:
-                            selectedFragment = new AlbumFragment();
-                            break;
-                    }
-
-                    if (selectedFragment != null) {
-                        MainActivity.this.getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, selectedFragment)
-                                .commit();
-                    }
-                    return true;
-                }
-            };
 }

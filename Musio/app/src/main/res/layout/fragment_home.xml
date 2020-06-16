@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.18">
+            app:layout_constraintVertical_bias="0.20">
         </TextView>
 
         <TextView
@@ -54,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40">
+            app:layout_constraintVertical_bias="0.45">
         </TextView>
 
         <TextView
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/btn_rounded"
             android:drawableStart="@drawable/ic_play_rounded_btn"
             android:elevation="8dp"
@@ -92,7 +92,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/btn_rounded"
             android:drawableStart="@drawable/ic_share"
             android:elevation="8dp"
