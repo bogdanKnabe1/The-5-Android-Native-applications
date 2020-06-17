@@ -15,7 +15,7 @@ public class YoutubeAPI {
     public static final String KEY = "key=AIzaSyAw7zNhlEoJYLbg4fbE7VPQ0y4V50GVsNY";
     public static final String sch = "search?";
     public static final String chid = "&channelId=" + CHANNEL_ID;
-    public static final String mx = "&maxResults=10";
+    public static final String mx = "&maxResults=50";
     public static final String ord = "&order=date";
     public static final String part = "&part=snippet";
     public static final String NPT = "&pageToken=";

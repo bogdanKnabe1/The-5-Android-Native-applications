@@ -6,4 +6,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_of_track"><![CDATA[Akcent feat Lidia Buble & DDY Nunes - Kamelia]]></string>
+    <string name="playlist_name">Playlist name</string>
+    <string name="numbers_of_video">Numbers of video</string>
+    <string name="numbers">Numbers</string>
 </resources>
