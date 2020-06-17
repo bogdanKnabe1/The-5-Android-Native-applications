@@ -2,19 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="275dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:padding="25dp"
-    android:elevation="8dp"
     android:background="?attr/selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/iv_playlist_thumb"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+    <!--Check when api work-->
+    <com.example.musio.utility.RoundRectCornerImageView
+        android:id="@+id/iv_playlist_presentation"
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -25,12 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/playlist_name"
+        android:textColor="@color/colorHeader"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_thumb" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_presentation" />
 
     <TextView
         android:id="@+id/tv_video_count1"
@@ -38,7 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/numbers_of_video"
+        android:text="@string/playlistCount"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorSubtitle"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="@+id/tv_playlist_title"
@@ -50,29 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".7" />
+        app:layout_constraintGuide_end="39dp" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_playlist_thumb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/overlay_playlist" />
-
-    <TextView
-        android:id="@+id/tv_video_count2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/numbers"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <View
         android:id="@+id/divider2"

@@ -25,14 +25,15 @@
             android:src="@drawable/singer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/top_track" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="// TRENDING"
+            android:text="@string/trandingForChange"
             android:textColor="@android:color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -81,7 +82,7 @@
             android:drawableStart="@drawable/ic_play_rounded_btn"
             android:elevation="8dp"
             android:padding="8dp"
-            android:text="PLAY"
+            android:text="@string/playButton"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent">
@@ -110,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:text="Featured Tracks"
+        android:text="@string/playlists"
         android:textColor="@color/colorHeader"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -136,15 +137,13 @@
             android:id="@+id/recycler_playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="16dp">
-
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top Tracks"
+            android:text="@string/top_Charts"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/colorHeader"
@@ -164,5 +163,38 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="2000">
+
+        <include layout="@layout/shimmer_video" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="2000">
+
+        <include layout="@layout/shimmer_video" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

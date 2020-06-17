@@ -17,9 +17,13 @@ import com.example.musio.adapter.AdapterHome;
 import com.example.musio.models.ModelSongList;
 import com.example.musio.models.VideoYT;
 import com.example.musio.network.YoutubeAPI;
+import com.facebook.shimmer.ShimmerFrameLayout;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +42,10 @@ public class AlbumFragment extends Fragment {
     private AdapterHome adapter;
     private LinearLayoutManager manager;
     private List<VideoYT> videoList = new ArrayList<>();
+    private ShimmerFrameLayout loading1,loading2;
+    private boolean isScroll = false;
+    private int currentItem, totalItem, scrollOutItem;
+    private String nextPageToken = "";
 
 
     public AlbumFragment() {
@@ -53,7 +61,9 @@ public class AlbumFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_albums, container, false);
 
-        RecyclerView rv = view.findViewById(R.id.musicListView);
+        loading1 = view.findViewById(R.id.shimmer1);
+        loading2 = view.findViewById(R.id.shimmer2);
+        RecyclerView rv = view.findViewById(R.id.musicRecyclerView);
         adapter = new AdapterHome(getContext(),videoList);
         manager = new LinearLayoutManager(getContext());
         rv.setAdapter(adapter);
@@ -67,35 +77,48 @@ public class AlbumFragment extends Fragment {
     }
 
     private void getJson() {
+        loading1.setVisibility(View.VISIBLE);
         String url = YoutubeAPI.BASE_URL + YoutubeAPI.sch + YoutubeAPI.KEY + YoutubeAPI.chid + YoutubeAPI.mx + YoutubeAPI.ord
                 + YoutubeAPI.part;
-
+        if (!nextPageToken.equals("")){
+            url = url + YoutubeAPI.NPT + nextPageToken;
+            loading1.setVisibility(View.GONE);
+            loading2.setVisibility(View.VISIBLE);
+        }
+        if (nextPageToken == null){
+            return;
+        }
         Call<ModelSongList> data = YoutubeAPI.getVideo().getHomeVideo(url);
         data.enqueue(new Callback<ModelSongList>() {
             @Override
-            public void onResponse(Call<ModelSongList> call, Response<ModelSongList> response) {
+            public void onResponse(@NotNull Call<ModelSongList> call, @NotNull Response<ModelSongList> response) {
                 if (response.errorBody() != null){
                     Log.w(TAG, "onResponse: " + response.errorBody() );
+                    loading1.setVisibility(View.GONE);
+                    loading2.setVisibility(View.GONE);
                     Toast.makeText(getContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 } else {
-                    ModelSongList mh = response.body();
-                    videoList.addAll(mh.getItems());
+                    ModelSongList msl = response.body();
+                    videoList.addAll(Objects.requireNonNull(msl).getItems());
                     adapter.notifyDataSetChanged();
-
-                    /*if (mh.getNextPageToken() != null){
-                        nextPageToken = mh.getNextPageToken();
-                    }*/
+                    loading1.setVisibility(View.GONE);
+                    loading2.setVisibility(View.GONE);
+                    if (msl.getNextPageToken() != null){
+                        nextPageToken = msl.getNextPageToken();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<ModelSongList> call, Throwable t) {
+            public void onFailure(@NotNull Call<ModelSongList> call, @NotNull Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
-
+                loading1.setVisibility(View.GONE);
+                loading2.setVisibility(View.GONE);
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }
 
 

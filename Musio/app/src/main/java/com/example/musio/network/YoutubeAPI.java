@@ -1,5 +1,6 @@
 package com.example.musio.network;
 
+import com.example.musio.models.ModelPlaylist;
 import com.example.musio.models.ModelSongList;
 
 import retrofit2.Call;
@@ -10,6 +11,7 @@ import retrofit2.http.Url;
 
 public class YoutubeAPI {
 
+    //CAN'T be private
     public static final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
     public static final String CHANNEL_ID = "UC6pPKYjldMfxcHASuAT-vLw";
     public static final String KEY = "key=AIzaSyAw7zNhlEoJYLbg4fbE7VPQ0y4V50GVsNY";
@@ -35,10 +37,10 @@ public class YoutubeAPI {
         @GET
         Call<ModelSongList> getHomeVideo(@Url String url);
 
-        /*@GET
+        @GET
         Call<ModelPlaylist> getPlaylist(@Url String url);
 
-        @GET
+        /*@GET
         Call<ModelChannel> getChannel(@Url String url);*/
     }
 

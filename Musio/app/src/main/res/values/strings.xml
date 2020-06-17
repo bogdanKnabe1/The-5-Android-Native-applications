@@ -9,4 +9,11 @@
     <string name="playlist_name">Playlist name</string>
     <string name="numbers_of_video">Numbers of video</string>
     <string name="numbers">Numbers</string>
+    <string name="playlists">Playlists</string>
+    <string name="tittle">Musio</string>
+    <string name="top_track">top track</string>
+    <string name="trandingForChange">// TRENDING</string>
+    <string name="playButton">PLAY</string>
+    <string name="top_Charts">Top Tracks</string>
+    <string name="playlistCount">PlaylistCount</string>
 </resources>

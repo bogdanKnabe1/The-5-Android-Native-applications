@@ -42,13 +42,19 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.2'
 
     //networking
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.7.1"
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
 
     //Iamge processing/download
     implementation 'com.squareup.picasso:picasso:2.71828'
+    
+    //For loading
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    //Player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.3'
 
     //Circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
