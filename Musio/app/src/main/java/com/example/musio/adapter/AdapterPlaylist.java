@@ -34,23 +34,23 @@ public class AdapterPlaylist extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class YoutubeHolder extends RecyclerView.ViewHolder {
 
         ImageView thumbnail;
-        TextView judul, vid_count1, vid_count2;
+        TextView playlistName, vid_count1;
 
         public YoutubeHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.iv_playlist_presentation);
-            judul = itemView.findViewById(R.id.tv_playlist_title);
+            playlistName = itemView.findViewById(R.id.tv_playlist_title);
             vid_count1 = itemView.findViewById(R.id.tv_video_count1);
         }
 
         public void setData(PlaylistItems data) {
-            final String getJudul = data.getSnippet().getTitle();
+            final String getPlaylistName = data.getSnippet().getTitle();
             int getCount = data.getContentDetails().getItemCount();
             String getThumb = data.getSnippet().getThumbnails().getMedium().getUrl();
 
-            itemView.setOnClickListener(v -> Toast.makeText(context, getJudul, Toast.LENGTH_SHORT).show());
+            itemView.setOnClickListener(v -> Toast.makeText(context, getPlaylistName, Toast.LENGTH_SHORT).show());
 
-            judul.setText(getJudul);
+            playlistName.setText(getPlaylistName);
             vid_count1.setText(getCount + " video");
             Picasso.get()
                     .load(getThumb)
@@ -75,7 +75,7 @@ public class AdapterPlaylist extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.music_item, parent, false);
+        View view = inflater.inflate(R.layout.playlist_item, parent, false);
         return new YoutubeHolder(view);
     }
 

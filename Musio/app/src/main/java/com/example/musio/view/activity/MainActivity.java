@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Make fullscreen
         setContentView(R.layout.activity_main);
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
             // Do something for P and above versions
 
             getWindow().getDecorView().setSystemUiVisibility(
@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else{
             // do something for phones running an SDK before P
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
         }
 
         //INIT
@@ -72,12 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawerLayout,toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
+        navigationView.getHeaderView(0).setOnClickListener(v -> drawerLayout.closeDrawer(Gravity.LEFT));
 
         //set icon and toolbar settings
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
