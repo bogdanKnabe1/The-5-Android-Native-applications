@@ -16,4 +16,5 @@
     <string name="playButton">PLAY</string>
     <string name="top_Charts">Top Tracks</string>
     <string name="playlistCount">PlaylistCount</string>
+    <string name="template">Kamelia</string>
 </resources>

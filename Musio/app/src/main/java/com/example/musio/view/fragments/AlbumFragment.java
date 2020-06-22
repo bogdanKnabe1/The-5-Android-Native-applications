@@ -72,7 +72,6 @@ public class AlbumFragment extends Fragment {
         if (videoList.size() == 0){
             getJson();
         }
-
         return view;
     }
 
