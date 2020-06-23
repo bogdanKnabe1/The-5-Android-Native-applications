@@ -12,8 +12,8 @@
 
     <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:progressBackgroundTint">#979797</item>
-        <item name="android:progressTint">#431515</item>
-        <item name="android:colorControlActivated">#601D1D</item>
+        <item name="android:progressTint">@android:color/white</item>
+        <item name="android:colorControlActivated">@android:color/white</item>
     </style>
 
 </resources>

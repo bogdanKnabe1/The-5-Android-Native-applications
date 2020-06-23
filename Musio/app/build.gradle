@@ -10,8 +10,19 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        renderscriptTargetApi 29
+        renderscriptSupportModeEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    allprojects {
+        repositories {
+            jcenter()
+            maven {
+                url 'https://maven.google.com'
+            }
+        }
     }
 
     compileOptions {
@@ -52,6 +63,9 @@ dependencies {
     
     //For loading
     implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    //blurry image
+    implementation 'jp.wasabeef:blurry:3.0.0'
 
     //Player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.3'

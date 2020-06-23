@@ -1,6 +1,7 @@
 package com.example.musio.view.fragments;
 
 import android.content.ContentValues;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
@@ -55,7 +57,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,6 +76,9 @@ public class HomeFragment extends Fragment {
         //charts
         rvCharts.setAdapter(adapterCharts);
         rvCharts.setLayoutManager(managerVertical);
+        //disable RecyclerView scrolling
+        rvCharts.setNestedScrollingEnabled(false);
+        //infinite scroll
         rvCharts.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -131,6 +135,7 @@ public class HomeFragment extends Fragment {
         }
         return v;
     }
+
 
     private void getJson() {
         loading1.setVisibility(View.VISIBLE);
