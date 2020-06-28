@@ -51,7 +51,7 @@ public class FindNewSongFragment extends Fragment {
         progressBar = v.findViewById(R.id.progress_circular);
         editTextSearch = v.findViewById(R.id.searchView);
 
-        //hideProgress();
+        hideProgress();
 
         recyclerView = v.findViewById(R.id.author_recycler_view);
         recyclerView.setHasFixedSize(true);
