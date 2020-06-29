@@ -48,6 +48,7 @@ public class DashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        //init data
         init(view);
 
         return view;
@@ -55,6 +56,7 @@ public class DashboardFragment extends Fragment {
 
 
     private void init(View root) {
+        //add special card layout for manager
         CardStackView cardStackView = root.findViewById(R.id.card_stack_view);
         manager = new CardStackLayoutManager(getContext(), new CardStackListener() {
             @Override
@@ -62,6 +64,7 @@ public class DashboardFragment extends Fragment {
                 Log.d(TAG, "onCardDragging: d=" + direction.name() + " ratio=" + ratio);
             }
 
+            //handle swipe events
             @Override
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
@@ -107,7 +110,7 @@ public class DashboardFragment extends Fragment {
                 Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
             }
         });
-
+        //build manager(values can be changed)
         manager.setStackFrom(StackFrom.None);
         manager.setVisibleCount(3);
         manager.setTranslationInterval(8.0f);
@@ -124,7 +127,7 @@ public class DashboardFragment extends Fragment {
         cardStackView.setItemAnimator(new DefaultItemAnimator());
     }
 
-
+    //Pagination - adding second list if first in done(recreate with fresh new items)
     private void paginate() {
         List<ItemModel> old = adapter.getItems();
         List<ItemModel> fresh = new ArrayList<>(addList());

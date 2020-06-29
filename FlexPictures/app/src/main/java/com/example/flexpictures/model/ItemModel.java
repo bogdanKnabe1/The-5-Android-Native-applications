@@ -1,5 +1,6 @@
 package com.example.flexpictures.model;
 
+//Model for our data
 public class ItemModel {
     private int image;
     private String name, age, city;
