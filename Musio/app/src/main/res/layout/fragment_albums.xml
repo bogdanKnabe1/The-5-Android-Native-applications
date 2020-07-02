@@ -4,36 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--TOOLBAR-->
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:background="@android:color/transparent">
-        </androidx.appcompat.widget.Toolbar>
-
-        <TextView
-        android:id="@+id/logo_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
-        android:text="@string/tittle"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:textSize="34sp"
-        android:gravity="center"/>
-    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/musicRecyclerView"

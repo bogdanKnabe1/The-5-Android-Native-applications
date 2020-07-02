@@ -1,10 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.androiddeezer2020.MainActivity">
-    <item android:id="@+id/search"
+    tools:context=".view.activity.MainActivity">
+
+    <item
+        android:id="@+id/search"
         android:title="@string/search_title"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 </menu>

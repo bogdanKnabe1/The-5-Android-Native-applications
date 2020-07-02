@@ -101,13 +101,13 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onCardAppeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
             }
 
             @Override
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
             }
         });
         //build manager(values can be changed)

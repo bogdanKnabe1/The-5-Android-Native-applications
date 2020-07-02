@@ -42,7 +42,7 @@ public class MusicPlayerFragment extends Fragment {
 
 
         //blur
-        backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 25));
+        backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
         return v;
     }
 

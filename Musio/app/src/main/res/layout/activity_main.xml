@@ -32,7 +32,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -40,22 +40,29 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
-                android:background="@android:color/transparent">
+                android:layout_marginEnd="0dp"
+                android:background="@android:color/transparent"
+                app:theme="@style/AppTheme.Toolbar">
+
             </androidx.appcompat.widget.Toolbar>
 
-            <!--<TextView
-            android:id="@+id/logo_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:text="Musio"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:textSize="34sp"
-            android:gravity="center"/>-->
+            <TextView
+                android:id="@+id/logo_toolbar"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Musio"
+                android:textColor="@android:color/black"
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

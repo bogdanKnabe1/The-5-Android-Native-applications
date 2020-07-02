@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set toolbar
         setSupportActionBar(toolbar);
 
-
         //toggle drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout,toolbar, R.string.drawerOpen, R.string.drawerClose);
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_burger);
 
         navigationView.setNavigationItemSelectedListener(this);
 
