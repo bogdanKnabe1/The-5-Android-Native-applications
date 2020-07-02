@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.musio.R;
@@ -27,11 +28,12 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private TextView textViewLogo;
 
     private HomeFragment homeFragment = new HomeFragment();
     private AlbumFragment albumFragment = new AlbumFragment();
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawerCore);
         navigationView = findViewById(R.id.drawer_navigation_item);
+        textViewLogo = findViewById(R.id.logo_toolbar);
 
         //set toolbar
         setSupportActionBar(toolbar);

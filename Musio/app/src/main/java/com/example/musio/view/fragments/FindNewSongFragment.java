@@ -1,5 +1,6 @@
 package com.example.musio.view.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +46,8 @@ public class FindNewSongFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBar;
 
+
+
     public FindNewSongFragment() {
         // Required empty public constructor
     }
@@ -54,6 +58,7 @@ public class FindNewSongFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +66,6 @@ public class FindNewSongFragment extends Fragment {
 
         //Toolbar toolbar = v.findViewById(R.id.toolbarFind);
         //((AppCompatActivity)requireActivity()).setSupportActionBar(toolbar);
-
 
         progressBar = v.findViewById(R.id.progress_circular);
         hideProgress();
@@ -81,10 +85,17 @@ public class FindNewSongFragment extends Fragment {
     public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
-
+        //END POINT
         final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        if (searchView.isIconified()){
+            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Musio");
+        }else {
+            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("");
+        }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             String lastText = null;
+
 
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -135,17 +146,8 @@ public class FindNewSongFragment extends Fragment {
         //DeezerService.searchAlbum(requireActivity(), artist, rep, error);
     }
 
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity)requireActivity()).getSupportActionBar().hide();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity)requireActivity()).getSupportActionBar().show();
-    }*/
 
+    //ProgressBar
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
