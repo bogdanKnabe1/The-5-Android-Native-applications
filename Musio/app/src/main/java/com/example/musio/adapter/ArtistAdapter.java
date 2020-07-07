@@ -1,7 +1,6 @@
 package com.example.musio.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,23 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     private static final String TAG = "AdapterArtist";
 
     private List<Artist> listArtist;
+    OnArtistClickListener mListener;
 
     public Context context;
+
+    public interface OnArtistClickListener {
+        void onTextClick(String artist);
+    }
+
+    // set the listener. Must be called from the fragment
+    public void setListener(OnArtistClickListener listener) {
+        this.mListener = listener;
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public ArtistAdapter(List<Artist> listArtist) {
+        this.listArtist = listArtist;
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,15 +50,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            //c'est ici que l'on fait nos findView
-            textArtistName = (TextView) itemView.findViewById(R.id.textArtistName);
-            imageView = (ImageView) itemView.findViewById(R.id.imageArtist);
+            //find view's
+            textArtistName = itemView.findViewById(R.id.textArtistName);
+            imageView = itemView.findViewById(R.id.imageArtist);
         }
-    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public ArtistAdapter(List<Artist> listArtist) {
-        this.listArtist = listArtist;
     }
 
     // Create new views (invoked by the layout manager)
@@ -61,25 +70,18 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Artist artist = listArtist.get(position);
+        Artist artist = listArtist.get(position);
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textArtistName.setText(artist.getName());
 
-//        Picasso.with(holder.itemView.getContext())
-//                .load(artist.getPictureMedium())
-//                .centerCrop().fit().into(holder.imageView);
+
         Picasso.get().load(artist.getPictureMedium()).into(holder.imageView);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "click on <" + artist.getName()+ ">");
-                /*Intent intent = new Intent(view.getContext(), ListAlbumActivity.class);
-                intent.putExtra("artist", artist.getName());
-                view.getContext().startActivity(intent);*/
-            }
+        holder.itemView.setOnClickListener(view -> {
+            // get the name based on the position and tell the fragment via listener
+            mListener.onTextClick(artist.getName());
         });
 
     }

@@ -1,7 +1,6 @@
 package com.example.musio.view.fragments;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,15 +36,20 @@ import static com.android.volley.VolleyLog.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FindNewSongFragment extends Fragment {
+public class FindNewSongFragment extends Fragment implements ArtistAdapter.OnArtistClickListener {
 
     private RecyclerView recyclerView;
+    private RecyclerView recyclerViewAlbum;
     private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManagerAlbum;
     private ProgressBar progressBar;
     private Toolbar toolbarSearch;
     private LinearLayout linearLayout;
-    private ConstraintLayout constraintLayoutRecycler;
+    private ConstraintLayout constraintLayoutRecyclerArtist;
+    private ConstraintLayout constraintLayoutRecyclerAlbum;
     private ConstraintLayout constraintLayoutEmpty;
+    private String artist;
+
 
 
     public FindNewSongFragment() {
@@ -70,24 +73,32 @@ public class FindNewSongFragment extends Fragment {
         toolbarSearch = v.findViewById(R.id.toolbar2);
         ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarSearch);
         toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.NunitoExtraBold);
-
+        //Find include's
         linearLayout = v.findViewById(R.id.support_layout);
-        constraintLayoutRecycler = linearLayout.findViewById(R.id.main_search_recycler);
+        constraintLayoutRecyclerArtist = linearLayout.findViewById(R.id.main_search_recycler);
+        constraintLayoutRecyclerAlbum = linearLayout.findViewById(R.id.album_search_recycler);
         constraintLayoutEmpty = linearLayout.findViewById(R.id.main_empty_view);
 
-        progressBar = v.findViewById(R.id.progress_circular);
-        hideProgress();
-
+        //Find recycleView for author
         recyclerView = v.findViewById(R.id.author_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        //Find recyclerView for album
+        recyclerViewAlbum = v.findViewById(R.id.album_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(requireActivity());
         recyclerView.setLayoutManager(layoutManager);
 
+        // use a linear layout manager
+        layoutManagerAlbum = new LinearLayoutManager(requireActivity());
+        recyclerViewAlbum.setLayoutManager(layoutManagerAlbum);
 
+        progressBar = v.findViewById(R.id.progress_circular);
+        hideProgress();
         return v;
     }
+
 
     //Inflate m
     @Override
@@ -112,15 +123,22 @@ public class FindNewSongFragment extends Fragment {
                         Log.d(TAG, "searchAuthor Found " + response.getTotal() + " artist");
                         ArtistAdapter mAdapter = new ArtistAdapter(response.getData());
                         recyclerView.setAdapter(mAdapter);
+
+                        mAdapter.setListener(artist -> {
+                            constraintLayoutEmpty.setVisibility(View.GONE);
+                            constraintLayoutRecyclerAlbum.setVisibility(View.VISIBLE);
+                            searchAlbum(artist);
+                        });
+
                         hideProgress();
-                        constraintLayoutRecycler.setVisibility(View.VISIBLE);
+                        constraintLayoutRecyclerArtist.setVisibility(View.VISIBLE);
                     };
                     final Response.ErrorListener error = error1 -> {
                         Log.e(TAG, "searchAuthor onErrorResponse: " + error1.getMessage());
                         hideProgress();
                         constraintLayoutEmpty.setVisibility(View.GONE);
                     };
-
+                    //Call for artist
                     DeezerService.searchAuthor(requireActivity(), query, rep, error);
                 }
                 return false;
@@ -133,7 +151,9 @@ public class FindNewSongFragment extends Fragment {
         });
     }
 
-    public void searchAlbum(){
+
+    //Method for call for album
+    public void searchAlbum(String artist){
         Response.Listener<DataSearchAlbum> rep = response -> {
             Log.d(TAG, "searchAlbum Found " + response.getTotal() + " album");
             AlbumAdapter mAdapter = new AlbumAdapter(response.getData());
@@ -146,8 +166,9 @@ public class FindNewSongFragment extends Fragment {
         };
 
         //Fragment communication, pass artist
-        //DeezerService.searchAlbum(requireActivity(), artist, rep, error);
+        DeezerService.searchAlbum(requireActivity(), artist, rep, error);
     }
+
 
 
     //ProgressBar
@@ -159,4 +180,9 @@ public class FindNewSongFragment extends Fragment {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    //Retrieve data from adapter
+    @Override
+    public void onTextClick(String artist) {
+        this.artist = artist;
+    }
 }

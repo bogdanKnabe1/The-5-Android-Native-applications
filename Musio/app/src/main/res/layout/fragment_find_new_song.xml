@@ -20,6 +20,11 @@
         android:visibility="gone"/>
 
     <include
+        android:id="@+id/album_search_recycler"
+        layout="@layout/content_main_album"
+        android:visibility="gone"/>
+
+    <include
         android:id="@+id/main_empty_view"
         layout="@layout/content_if_empty"
         android:visibility="visible"/>
