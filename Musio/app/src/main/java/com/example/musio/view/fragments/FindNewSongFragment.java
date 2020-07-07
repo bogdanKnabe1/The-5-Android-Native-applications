@@ -1,12 +1,14 @@
 package com.example.musio.view.fragments;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -42,6 +44,9 @@ public class FindNewSongFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBar;
     private Toolbar toolbarSearch;
+    private LinearLayout linearLayout;
+    private ConstraintLayout constraintLayoutRecycler;
+    private ConstraintLayout constraintLayoutEmpty;
 
 
     public FindNewSongFragment() {
@@ -64,7 +69,11 @@ public class FindNewSongFragment extends Fragment {
         //Setup toolbar for fragment and example for future
         toolbarSearch = v.findViewById(R.id.toolbar2);
         ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarSearch);
-        toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.RobotoBoldTextAppearance);
+        toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.NunitoExtraBold);
+
+        linearLayout = v.findViewById(R.id.support_layout);
+        constraintLayoutRecycler = linearLayout.findViewById(R.id.main_search_recycler);
+        constraintLayoutEmpty = linearLayout.findViewById(R.id.main_empty_view);
 
         progressBar = v.findViewById(R.id.progress_circular);
         hideProgress();
@@ -89,7 +98,6 @@ public class FindNewSongFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             String lastText = null;
 
-
             @Override
             public boolean onQueryTextSubmit(String query) {
 
@@ -105,10 +113,12 @@ public class FindNewSongFragment extends Fragment {
                         ArtistAdapter mAdapter = new ArtistAdapter(response.getData());
                         recyclerView.setAdapter(mAdapter);
                         hideProgress();
+                        constraintLayoutRecycler.setVisibility(View.VISIBLE);
                     };
                     final Response.ErrorListener error = error1 -> {
                         Log.e(TAG, "searchAuthor onErrorResponse: " + error1.getMessage());
                         hideProgress();
+                        constraintLayoutEmpty.setVisibility(View.GONE);
                     };
 
                     DeezerService.searchAuthor(requireActivity(), query, rep, error);

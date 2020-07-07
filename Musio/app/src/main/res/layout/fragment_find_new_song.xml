@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/support_layout"
     tools:context=".view.fragments.FindNewSongFragment">
 
 
@@ -14,7 +14,15 @@
         layout="@layout/tool_bar2"
         android:visibility="visible" />
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/main_search_recycler"
+        layout="@layout/content_main"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/main_empty_view"
+        layout="@layout/content_if_empty"
+        android:visibility="visible"/>
 
     <ProgressBar
         android:id="@+id/progress_circular"

@@ -25,7 +25,7 @@
         <item name="android:textColorSecondary">@android:color/black</item>
     </style>
 
-    <style name="RobotoBoldTextAppearance">
+    <style name="NunitoExtraBold">
         <item name="android:fontFamily">@font/nunito_extrabold</item>
     </style>
 
