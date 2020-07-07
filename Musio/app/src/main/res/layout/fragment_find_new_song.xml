@@ -7,7 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.fragments.FindNewSongFragment">
-    
+
+
+    <include
+        android:id="@+id/toolbarSearchLayout"
+        layout="@layout/tool_bar2"
+        android:visibility="visible" />
 
     <include layout="@layout/content_main" />
 

@@ -1,36 +1,32 @@
 package com.example.musio.view.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.example.musio.R;
 import com.example.musio.adapter.AlbumAdapter;
 import com.example.musio.adapter.ArtistAdapter;
 import com.example.musio.models.deezerData.DataSearchAlbum;
 import com.example.musio.models.deezerData.DataSearchArtist;
 import com.example.musio.network.DeezerService;
-import com.example.musio.view.activity.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,13 +41,14 @@ public class FindNewSongFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBar;
-
+    private Toolbar toolbarSearch;
 
 
     public FindNewSongFragment() {
         // Required empty public constructor
     }
 
+    //For fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +61,10 @@ public class FindNewSongFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_find_new_song, container, false); // Inflate the layout for this fragment
 
-        //Toolbar toolbar = v.findViewById(R.id.toolbarFind);
-        //((AppCompatActivity)requireActivity()).setSupportActionBar(toolbar);
+        //Setup toolbar for fragment and example for future
+        toolbarSearch = v.findViewById(R.id.toolbar2);
+        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarSearch);
+        toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.RobotoBoldTextAppearance);
 
         progressBar = v.findViewById(R.id.progress_circular);
         hideProgress();
@@ -81,18 +80,12 @@ public class FindNewSongFragment extends Fragment {
         return v;
     }
 
+    //Inflate m
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        //END POINT
         final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        if (searchView.isIconified()){
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Musio");
-        }else {
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("");
-        }
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             String lastText = null;
 
@@ -142,17 +135,17 @@ public class FindNewSongFragment extends Fragment {
             hideProgress();
         };
 
-        //Fragment communication
+        //Fragment communication, pass artist
         //DeezerService.searchAlbum(requireActivity(), artist, rep, error);
     }
 
 
     //ProgressBar
-    public void showProgress() {
+    private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    public void hideProgress() {
+    private void hideProgress() {
         progressBar.setVisibility(View.INVISIBLE);
     }
 

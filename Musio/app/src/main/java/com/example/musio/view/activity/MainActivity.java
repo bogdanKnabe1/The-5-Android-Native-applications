@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
@@ -63,26 +63,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         //INIT
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawerCore);
         navigationView = findViewById(R.id.drawer_navigation_item);
         textViewLogo = findViewById(R.id.logo_toolbar);
 
         //set toolbar
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
-        //toggle drawer
+        //toggle drawer (was overloaded constructor with toolbar previously)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout,toolbar, R.string.drawerOpen, R.string.drawerClose);
+                this, drawerLayout, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.getHeaderView(0).setOnClickListener(v -> drawerLayout.closeDrawer(Gravity.LEFT));
 
         //set icon and toolbar settings
-        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
+        /*Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_burger);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_burger);*/
 
         navigationView.setNavigationItemSelectedListener(this);
 

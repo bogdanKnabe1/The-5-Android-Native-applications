@@ -9,6 +9,10 @@
     tools:context=".view.fragments.MusicPlayerFragment"
     >
 
+    <include
+        android:id="@+id/toolbar1"
+        layout="@layout/tool_bar1"
+        android:visibility="visible" />
 
     <ImageView
         android:id="@+id/imageViewBackground"
