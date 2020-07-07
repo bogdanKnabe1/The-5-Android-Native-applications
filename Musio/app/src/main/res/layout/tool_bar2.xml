@@ -22,9 +22,6 @@
         android:background="@android:color/transparent"
         app:theme="@style/AppTheme.Toolbar"
         app:titleTextAppearance="@style/Toolbar.TitleText" >
-
-
-
     </androidx.appcompat.widget.Toolbar>
 
     <TextView

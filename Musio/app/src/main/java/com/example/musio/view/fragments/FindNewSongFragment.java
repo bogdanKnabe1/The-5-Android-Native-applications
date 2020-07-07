@@ -73,6 +73,7 @@ public class FindNewSongFragment extends Fragment implements ArtistAdapter.OnArt
         toolbarSearch = v.findViewById(R.id.toolbar2);
         ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarSearch);
         toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.NunitoExtraBold);
+
         //Find include's
         linearLayout = v.findViewById(R.id.support_layout);
         constraintLayoutRecyclerArtist = linearLayout.findViewById(R.id.main_search_recycler);
