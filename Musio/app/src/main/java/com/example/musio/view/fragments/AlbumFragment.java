@@ -6,8 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +23,7 @@ import com.example.musio.models.ModelSongList;
 import com.example.musio.models.VideoYT;
 import com.example.musio.network.YoutubeAPI;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,8 +50,11 @@ public class AlbumFragment extends Fragment {
     private List<VideoYT> videoList = new ArrayList<>();
     private ShimmerFrameLayout loading1,loading2;
     private boolean isScroll = false;
-    private int currentItem, totalItem, scrollOutItem;
     private String nextPageToken = "";
+    private Toolbar toolbarMusicPlayer;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private TextView buttonBurgerMenu;
 
 
     public AlbumFragment() {
@@ -59,11 +68,25 @@ public class AlbumFragment extends Fragment {
         // to display menu in action bar
         //setHasOptionsMenu(true);
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_albums, container, false);
+        View v =  inflater.inflate(R.layout.fragment_albums, container, false);
 
-        loading1 = view.findViewById(R.id.shimmer1);
-        loading2 = view.findViewById(R.id.shimmer2);
-        RecyclerView rv = view.findViewById(R.id.musicRecyclerView);
+        //init view's in fragment
+        buttonBurgerMenu = v.findViewById(R.id.menu_burger_button);
+        loading1 = v.findViewById(R.id.shimmer1);
+        loading2 = v.findViewById(R.id.shimmer2);
+        RecyclerView rv = v.findViewById(R.id.musicRecyclerView);
+
+        //toolbar
+        toolbarMusicPlayer = v.findViewById(R.id.toolbar_music_player);
+        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarMusicPlayer);
+        //set title to false toolbar settings
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        //drawer
+        drawerLayout = requireActivity().findViewById(R.id.drawerCore);
+        navigationView = requireActivity().findViewById(R.id.drawer_navigation_item);
+
+        //set adapter + manager
         adapter = new AdapterHome(getContext(),videoList);
         manager = new LinearLayoutManager(getContext());
         rv.setAdapter(adapter);
@@ -72,8 +95,14 @@ public class AlbumFragment extends Fragment {
         if (videoList.size() == 0){
             getJson();
         }
-        return view;
+
+        //set clickListener for burger button in navView
+        buttonBurgerMenu.setOnClickListener(v1 -> drawerLayout.openDrawer(navigationView));
+
+        return v;
     }
+
+
 
     private void getJson() {
         loading1.setVisibility(View.VISIBLE);

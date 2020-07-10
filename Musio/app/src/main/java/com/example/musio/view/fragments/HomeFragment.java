@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.musio.R;
@@ -26,6 +30,7 @@ import com.example.musio.models.PlaylistItems;
 import com.example.musio.models.VideoYT;
 import com.example.musio.network.YoutubeAPI;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,6 +57,10 @@ public class HomeFragment extends Fragment {
     private boolean isScroll = false;
     private int currentItem, totalItem, scrollOutItem;
     private String nextPageToken = "";
+    private Toolbar toolbarHome;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private TextView menuBurgerButtonHome;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -63,15 +72,31 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false); // Inflate the layout for this fragment
 
         //Inside onCreateView fragment
-        // Inflate the layout for this fragment
+        // Inflate/find views in layout for this fragment
         loading1 = v.findViewById(R.id.shimmer1);
         loading2 = v.findViewById(R.id.shimmer2);
         RecyclerView rv = v.findViewById(R.id.recycler_playlist);
         RecyclerView rvCharts = v.findViewById(R.id.recycler_charts);
+        menuBurgerButtonHome = v.findViewById(R.id.menu_burger_button_home);
+
+        //toolbar
+        toolbarHome = v.findViewById(R.id.toolbar_home_player);
+        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarHome);
+        //set title to false toolbar settings
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        //drawer
+        drawerLayout = requireActivity().findViewById(R.id.drawerCore);
+        navigationView = requireActivity().findViewById(R.id.drawer_navigation_item);
+
+        //set adapter's and managers
         adapter = new AdapterPlaylist(getContext(), videoList);
         adapterCharts = new AdapterHome(getContext(), videoListCharts);
         managerHorizontal = new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false);
         managerVertical = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        //set clickListener for burger button in navView
+        menuBurgerButtonHome.setOnClickListener(v1 -> drawerLayout.openDrawer(navigationView));
 
         //charts
         rvCharts.setAdapter(adapterCharts);

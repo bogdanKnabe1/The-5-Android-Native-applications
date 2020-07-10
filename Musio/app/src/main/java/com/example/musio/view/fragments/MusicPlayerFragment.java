@@ -31,30 +31,14 @@ import jp.wasabeef.blurry.Blurry;
 public class MusicPlayerFragment extends Fragment {
     private ImageView backGroundView;
     private ConstraintLayout constraintLayout;
-    private Toolbar toolbarMusicPlayer;
 
     public MusicPlayerFragment() {
         // Required empty public constructor
     }
 
-    //For fragment
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_music_player, container, false); // Inflate the layout for this fragment
-
-        toolbarMusicPlayer = v.findViewById(R.id.toolbar_music_player);
-        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarMusicPlayer);
-
-        Objects.requireNonNull(Objects.requireNonNull(((AppCompatActivity) requireActivity())).getSupportActionBar()).setHomeButtonEnabled(true);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_menu_burger);
 
         //init
         backGroundView = v.findViewById(R.id.imageViewBackground);

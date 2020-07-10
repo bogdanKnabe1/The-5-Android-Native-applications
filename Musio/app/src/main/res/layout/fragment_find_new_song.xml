@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/toolbarSearchLayout"
-        layout="@layout/tool_bar2"
+        layout="@layout/tool_bar_search"
         android:visibility="visible" />
 
     <include
