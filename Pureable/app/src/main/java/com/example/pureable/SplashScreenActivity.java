@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(listener);
+        delaySplashScreen();
     }
 
     @Override
@@ -79,30 +79,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         .createSignInIntentBuilder()
         .setAuthMethodPickerLayout(authMethodPickerLayout)
         .setIsSmartLockEnabled(false)
+                .setTheme(R.style.LoginTheme)
         .setAvailableProviders(providers)
         .build(), LOGIN_REQUEST_CODE);
     }
 
     @SuppressLint("CheckResult")
     private void delaySplashScreen() {
-        Completable.timer(5, TimeUnit.SECONDS,
+        Completable.timer(3, TimeUnit.SECONDS,
                 AndroidSchedulers.mainThread())
-                .subscribe(() -> Toast.makeText(SplashScreenActivity.this, "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show());
+                .subscribe(() ->
+                        //After show splash screen , ask login if not Login
+                        firebaseAuth.addAuthStateListener(listener)
+                );
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LOGIN_REQUEST_CODE)
-        {
+        if (requestCode == LOGIN_REQUEST_CODE) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
-            if (resultCode == RESULT_OK)
-            {
+            if (resultCode == RESULT_OK) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             }
-            else
-            {
+            else {
                 Toast.makeText(this, "[ERROR]: " +response.getError().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
