@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,9 +35,10 @@
 
 
              <com.google.android.material.textfield.TextInputLayout
+                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                  android:layout_width="0dp"
                  android:layout_weight="1"
-                 android:layout_marginRight="4dp"
+                 android:layout_marginEnd="4dp"
                  android:layout_height="wrap_content">
 
                  <com.google.android.material.textfield.TextInputEditText
@@ -50,9 +51,10 @@
              </com.google.android.material.textfield.TextInputLayout>
 
              <com.google.android.material.textfield.TextInputLayout
+                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                  android:layout_width="0dp"
                  android:layout_weight="1"
-                 android:layout_marginRight="4dp"
+                 android:layout_marginEnd="4dp"
                  android:layout_height="wrap_content">
 
                  <com.google.android.material.textfield.TextInputEditText
@@ -69,6 +71,7 @@
          </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp">
@@ -88,6 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:text="@string/continue_text"
         style="@style/Widget.MaterialComponents.Button"/>
