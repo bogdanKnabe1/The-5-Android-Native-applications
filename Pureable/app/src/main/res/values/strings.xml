@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TaxiX</string>
+    <string name="regisrer_text">Let\'s start with creating your account</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone umber</string>
+    <string name="continue_text">Continue</string>
 </resources>
