@@ -22,6 +22,21 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     private List<Album> listAlbum;
 
     public Context context;
+    OnAlbumClickListener mListener;
+
+    public interface OnAlbumClickListener {
+        void onTextClick(int album);
+    }
+
+    // set the listener. Must be called from the fragment
+    public void setListener(OnAlbumClickListener listener) {
+        this.mListener = listener;
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public AlbumAdapter(List<Album> listAlbum) {
+        this.listAlbum = listAlbum;
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -41,10 +56,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public AlbumAdapter(List<Album> listAlbum) {
-        this.listAlbum = listAlbum;
-    }
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -71,14 +82,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 //                .centerCrop().fit().into(holder.imageView);
         Picasso.get().load(album.getCoverMedium()).into(holder.imageView);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "click on <" + album.getTitle()+ ">");
-                /*Intent intent = new Intent(view.getContext(), ListTrackActivity.class);
-                intent.putExtra("album", album.getId());
-                view.getContext().startActivity(intent);*/
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Log.d(TAG, "click on <" + album.getTitle()+ ">");
+            mListener.onTextClick(album.getId());
         });
 
     }

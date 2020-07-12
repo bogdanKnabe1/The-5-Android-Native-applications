@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/recyclerViewSearch_content_album"
+    android:id="@+id/recyclerViewSearch_content_track"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/album_recycler_view"
+        android:id="@+id/track_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

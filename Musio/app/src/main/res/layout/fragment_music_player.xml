@@ -64,8 +64,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -117,7 +118,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.7">
+        app:layout_constraintVertical_bias="0.6">
 
         <ImageView
             android:id="@+id/prev_button"

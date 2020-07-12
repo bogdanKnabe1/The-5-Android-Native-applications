@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.musio.R;
 import com.example.musio.models.deezerData.Track;
 import com.example.musio.utility.MediaPlayerSingleton;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,15 +38,17 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         private TextView textTrackName;
         private TextView textTrackDuration;
         private ImageButton playButton;
+        private ImageView trackImage;
         private View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             //c'est ici que l'on fait nos findView
-            textTrackName = (TextView) itemView.findViewById(R.id.textTrackName);
-            textTrackDuration = (TextView) itemView.findViewById(R.id.textTrackDuration);
-            playButton = (ImageButton) itemView.findViewById(R.id.playButton);
+            trackImage = itemView.findViewById(R.id.imageViewTrack);
+            textTrackName = itemView.findViewById(R.id.textTrackName);
+            textTrackDuration = itemView.findViewById(R.id.textTrackDuration);
+            playButton = itemView.findViewById(R.id.playButton);
         }
     }
 
@@ -73,26 +77,25 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         // - replace the contents of the view with that element
         holder.textTrackName.setText(track.getTitle());
 
-        SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.FRANCE);
+        Picasso.get().load(track.getArtist().getPicture()).into(holder.trackImage);
+
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.ENGLISH);
         String str = format.format(new Date(track.getDuration()*1000));
 
         holder.textTrackDuration.setText(str);
 
-        holder.playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "click on <" + track.getTitle()+ ">");
-                Log.d(TAG, "url : " + track.getPreview());
-                MediaPlayerSingleton.INSTANCE.mp.reset();
-                MediaPlayerSingleton.INSTANCE.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                try {
-                    MediaPlayerSingleton.INSTANCE.mp.setDataSource(track.getPreview());
-                    MediaPlayerSingleton.INSTANCE.mp.prepare();
-                } catch (IOException e) {
-                    Log.e(TAG, "erreur media preview", e);
-                }
-                MediaPlayerSingleton.INSTANCE.mp.start();
+        holder.playButton.setOnClickListener(view -> {
+            Log.d(TAG, "click on <" + track.getTitle()+ ">");
+            Log.d(TAG, "url : " + track.getPreview());
+            MediaPlayerSingleton.INSTANCE.mp.reset();
+            MediaPlayerSingleton.INSTANCE.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            try {
+                MediaPlayerSingleton.INSTANCE.mp.setDataSource(track.getPreview());
+                MediaPlayerSingleton.INSTANCE.mp.prepare();
+            } catch (IOException e) {
+                Log.e(TAG, "Error", e);
             }
+            MediaPlayerSingleton.INSTANCE.mp.start();
         });
 
     }
