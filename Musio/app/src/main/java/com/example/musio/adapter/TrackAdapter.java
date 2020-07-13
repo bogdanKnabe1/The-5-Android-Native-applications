@@ -81,14 +81,13 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Track track = listTrack.get(position);
-        Artist artist = listTrack.get(position).getArtist();
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textTrackName.setText(track.getTitle());
         holder.textArtistName.setText(track.getArtist().getName());
 
-        //Picasso.get().load(artist.getPicture()).into(holder.trackImage);
+        //NO IMAGE
 
         SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.ENGLISH);
         String str = format.format(new Date(track.getDuration()*1000));

@@ -28,6 +28,7 @@ import com.example.musio.R;
 import com.example.musio.adapter.AlbumAdapter;
 import com.example.musio.adapter.ArtistAdapter;
 import com.example.musio.adapter.TrackAdapter;
+import com.example.musio.models.deezerData.Album;
 import com.example.musio.models.deezerData.DataSearchAlbum;
 import com.example.musio.models.deezerData.DataSearchArtist;
 import com.example.musio.models.deezerData.DataSearchTrack;
@@ -59,6 +60,7 @@ public class FindNewSongFragment extends Fragment  {
     private ConstraintLayout constraintLayoutRecyclerAlbum;
     private ConstraintLayout constraintLayoutRecyclerTrack;
     private ConstraintLayout constraintLayoutEmpty;
+    public Album albumObj;
 
     public FindNewSongFragment() {
         // Required empty public constructor
@@ -147,7 +149,6 @@ public class FindNewSongFragment extends Fragment  {
                             constraintLayoutRecyclerAlbum.setVisibility(View.VISIBLE);
                             searchAlbum(artist);
                         });
-
                         hideProgress();
                         constraintLayoutRecyclerArtist.setVisibility(View.VISIBLE);
                     };
@@ -182,6 +183,8 @@ public class FindNewSongFragment extends Fragment  {
                 constraintLayoutRecyclerTrack.setVisibility(View.VISIBLE);
                 searchTrack(album);
             });
+
+            mAdapter.setListenerAlbumTransfer(album -> albumObj = album);
             recyclerViewArtist.setAdapter(mAdapter);
             hideProgress();
         };
@@ -202,7 +205,7 @@ public class FindNewSongFragment extends Fragment  {
         Response.Listener<DataSearchTrack> rep = response -> {
             Log.d(TAG, "searchTrack Found " + response.getTotal() + " track");
             TrackAdapter mAdapter = new TrackAdapter(response.getData());
-            mAdapter.setListener(this::goToMusicPlayer);
+            mAdapter.setListener(track -> goToMusicPlayer(track, albumObj));
             recyclerViewTrack.setAdapter(mAdapter);
             hideProgress();
         };
@@ -215,11 +218,12 @@ public class FindNewSongFragment extends Fragment  {
         DeezerService.searchAlbumTrack(requireActivity(), album, rep, error);
     }
 
-
-    public void goToMusicPlayer(Track track){
+    //private method for call Music player
+    private void goToMusicPlayer(Track track, Album album){
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("key", track);
+        bundle.putParcelable("keyAlbum", album);
 
         MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
         musicPlayerFragment.setArguments(bundle);

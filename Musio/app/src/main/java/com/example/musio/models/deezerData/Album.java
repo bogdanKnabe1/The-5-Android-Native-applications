@@ -1,9 +1,12 @@
 package com.example.musio.models.deezerData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Album {
+public class Album implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -50,6 +53,48 @@ public class Album {
     @SerializedName("type")
     @Expose
     private String type;
+
+    protected Album(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        title = in.readString();
+        link = in.readString();
+        cover = in.readString();
+        coverSmall = in.readString();
+        coverMedium = in.readString();
+        coverBig = in.readString();
+        coverXl = in.readString();
+        if (in.readByte() == 0) {
+            genreId = null;
+        } else {
+            genreId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            nbTracks = null;
+        } else {
+            nbTracks = in.readInt();
+        }
+        recordType = in.readString();
+        tracklist = in.readString();
+        byte tmpExplicitLyrics = in.readByte();
+        explicitLyrics = tmpExplicitLyrics == 0 ? null : tmpExplicitLyrics == 1;
+        type = in.readString();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -171,4 +216,41 @@ public class Album {
         this.type = type;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(title);
+        dest.writeString(link);
+        dest.writeString(cover);
+        dest.writeString(coverSmall);
+        dest.writeString(coverMedium);
+        dest.writeString(coverBig);
+        dest.writeString(coverXl);
+        if (genreId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(genreId);
+        }
+        if (nbTracks == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(nbTracks);
+        }
+        dest.writeString(recordType);
+        dest.writeString(tracklist);
+        dest.writeByte((byte) (explicitLyrics == null ? 0 : explicitLyrics ? 1 : 2));
+        dest.writeString(type);
+    }
 }

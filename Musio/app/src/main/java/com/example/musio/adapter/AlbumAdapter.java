@@ -23,14 +23,24 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     public Context context;
     OnAlbumClickListener mListener;
+    OnAlbumClickTransferListener onAlbumClickTransferListener;
 
     public interface OnAlbumClickListener {
         void onTextClick(int album);
     }
 
+    public interface OnAlbumClickTransferListener {
+        void onAlbumClick(Album album);
+    }
+
     // set the listener. Must be called from the fragment
     public void setListener(OnAlbumClickListener listener) {
         this.mListener = listener;
+    }
+
+    // set the listener. Must be called from the fragment
+    public void setListenerAlbumTransfer(OnAlbumClickTransferListener listener) {
+        this.onAlbumClickTransferListener = listener;
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -77,14 +87,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         // - replace the contents of the view with that element
         holder.textAlbumName.setText(album.getTitle());
 
-//        Picasso.with(holder.itemView.getContext())
-//                .load(artist.getPictureMedium())
-//                .centerCrop().fit().into(holder.imageView);
         Picasso.get().load(album.getCoverMedium()).into(holder.imageView);
 
         holder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "click on <" + album.getTitle()+ ">");
             mListener.onTextClick(album.getId());
+            onAlbumClickTransferListener.onAlbumClick(album);
         });
 
     }

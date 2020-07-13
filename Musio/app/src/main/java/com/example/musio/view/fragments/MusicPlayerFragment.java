@@ -2,6 +2,7 @@ package com.example.musio.view.fragments;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,9 +20,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.musio.R;
+import com.example.musio.models.deezerData.Album;
 import com.example.musio.models.deezerData.Track;
+import com.squareup.picasso.Picasso;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Objects;
 
 /**
@@ -34,13 +41,16 @@ public class MusicPlayerFragment extends Fragment {
     private ConstraintLayout constraintLayout;
     private ImageView playBtn;
     private ImageView pauseBtn;
+    private ImageView roundedImagePreview;
     private TextView musicNameText;
     private TextView artistNameText;
     private SeekBar seekBar;
     private TextView currentTime;
     private TextView durationEnd;
     private Track track;
+    private Album album;
     private MediaPlayer player;
+
 
     public MusicPlayerFragment() {
         // Required empty public constructor
@@ -54,17 +64,23 @@ public class MusicPlayerFragment extends Fragment {
 
         playBtn = v.findViewById(R.id.play_btn);
         pauseBtn = v.findViewById(R.id.pause_btn);
+        roundedImagePreview = v.findViewById(R.id.roundRectCornerImageView);
         musicNameText = v.findViewById(R.id.music_name);
         artistNameText = v.findViewById(R.id.artist_name);
         durationEnd = v.findViewById(R.id.duration_End);
         currentTime = v.findViewById(R.id.durationStart);
         seekBar = v.findViewById(R.id.seekbar);
 
+        //init
+        backGroundView = v.findViewById(R.id.imageViewBackground);
+        Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
+
         MediaPlayer player = new MediaPlayer();
 
         if(null != bundle) {
             //init
             track = bundle.getParcelable("key");
+            album = bundle.getParcelable("keyAlbum");
 
             try {
                 player.setDataSource(Objects.requireNonNull(track).getPreview());
@@ -124,6 +140,7 @@ public class MusicPlayerFragment extends Fragment {
             } catch (IOException e) {
                 Log.e(TAG, "Error in init player", e);
             }
+            Picasso.get().load(album.getCoverMedium()).into(roundedImagePreview);
 
             musicNameText.setText(track.getTitle());
             artistNameText.setText(track.getArtist().getName());
@@ -131,6 +148,9 @@ public class MusicPlayerFragment extends Fragment {
             durationEnd.setText(getDurationString(track.getDuration()));
             player.start();
 
+
+            //blur set image on background //
+            //backGroundView.setImageBitmap(fastblur(loadBitmap(album.getCoverBig()), 0.4f, 21));
 
             //handle pause and play state's
             playBtn.setOnClickListener(v1 -> {
@@ -149,17 +169,55 @@ public class MusicPlayerFragment extends Fragment {
             });
         }
 
-        //init
-        backGroundView = v.findViewById(R.id.imageViewBackground);
-        Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
-
-        //blur
+        //blur set static img
         backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
-        //MediaPlayer start when clicked on track in findSearchFragment
 
         return v;
     }
 
+    //Convert bitmap method.
+    private Bitmap loadBitmap(String url) {
+        Bitmap bm = null;
+        InputStream is = null;
+        BufferedInputStream bis = null;
+        try
+        {
+            URLConnection conn = new URL(url).openConnection();
+            conn.connect();
+            is = conn.getInputStream();
+            bis = new BufferedInputStream(is, 8192);
+            bm = BitmapFactory.decodeStream(bis);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            if (bis != null)
+            {
+                try
+                {
+                    bis.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return bm;
+    }
 
     private String createTimeLabel(int duration) {
         String timeLabel = "";
