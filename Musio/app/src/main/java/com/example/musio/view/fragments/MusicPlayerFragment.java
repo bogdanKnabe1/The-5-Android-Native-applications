@@ -92,6 +92,34 @@ public class MusicPlayerFragment extends Fragment {
                     }
                 });
 
+                @SuppressLint("HandlerLeak")
+                Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        //Log.i("handler ", "handler called");
+                        int current_position = msg.what;
+                        seekBar.setProgress(current_position);
+                        String cTime = createTimeLabel(current_position);
+                        currentTime.setText(cTime);
+                    }
+                };
+
+                new Thread(() -> {
+                    while (player != null) {
+                        try {
+                            // Log.i("Thread ", "Thread Called");
+                            // create new message to send to handler
+                            if (player.isPlaying()) {
+                                Message msg = new Message();
+                                msg.what = player.getCurrentPosition();
+                                handler.sendMessage(msg);
+                                Thread.sleep(100);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
 
             } catch (IOException e) {
                 Log.e(TAG, "Error in init player", e);
@@ -133,7 +161,7 @@ public class MusicPlayerFragment extends Fragment {
     }
 
 
-    public String createTimeLabel(int duration) {
+    private String createTimeLabel(int duration) {
         String timeLabel = "";
         int min = duration / 1000 / 60;
         int sec = duration / 1000 % 60;
@@ -145,7 +173,7 @@ public class MusicPlayerFragment extends Fragment {
         return timeLabel;
     }
 
-    public String getDurationString(int seconds) {
+    private String getDurationString(int seconds) {
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         seconds = seconds % 60;
@@ -177,7 +205,7 @@ public class MusicPlayerFragment extends Fragment {
     // * or reduced by one, depending on if they are on the right or
     // * on the left side of the stack.
 
-    public Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
+    private Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 
         int width = Math.round(sentBitmap.getWidth() * scale);
         int height = Math.round(sentBitmap.getHeight() * scale);
@@ -201,15 +229,15 @@ public class MusicPlayerFragment extends Fragment {
         int wh = w * h;
         int div = radius + radius + 1;
 
-        int r[] = new int[wh];
-        int g[] = new int[wh];
-        int b[] = new int[wh];
+        int[] r = new int[wh];
+        int[] g = new int[wh];
+        int[] b = new int[wh];
         int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
-        int vmin[] = new int[Math.max(w, h)];
+        int[] vmin = new int[Math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
         divsum *= divsum;
-        int dv[] = new int[256 * divsum];
+        int[] dv = new int[256 * divsum];
         for (i = 0; i < 256 * divsum; i++) {
             dv[i] = (i / divsum);
         }
