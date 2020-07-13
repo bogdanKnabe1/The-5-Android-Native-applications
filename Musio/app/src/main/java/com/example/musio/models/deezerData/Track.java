@@ -1,9 +1,12 @@
 package com.example.musio.models.deezerData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Track {
+public class Track implements Parcelable {
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -55,6 +58,67 @@ public class Track {
     @SerializedName("type")
     @Expose
     private String type;
+
+    protected Track(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        byte tmpReadable = in.readByte();
+        readable = tmpReadable == 0 ? null : tmpReadable == 1;
+        title = in.readString();
+        titleShort = in.readString();
+        titleVersion = in.readString();
+        isrc = in.readString();
+        link = in.readString();
+        if (in.readByte() == 0) {
+            duration = null;
+        } else {
+            duration = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            trackPosition = null;
+        } else {
+            trackPosition = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            diskNumber = null;
+        } else {
+            diskNumber = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            rank = null;
+        } else {
+            rank = in.readInt();
+        }
+        byte tmpExplicitLyrics = in.readByte();
+        explicitLyrics = tmpExplicitLyrics == 0 ? null : tmpExplicitLyrics == 1;
+        if (in.readByte() == 0) {
+            explicitContentLyrics = null;
+        } else {
+            explicitContentLyrics = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            explicitContentCover = null;
+        } else {
+            explicitContentCover = in.readInt();
+        }
+        preview = in.readString();
+        type = in.readString();
+    }
+
+    public static final Creator<Track> CREATOR = new Creator<Track>() {
+        @Override
+        public Track createFromParcel(Parcel in) {
+            return new Track(in);
+        }
+
+        @Override
+        public Track[] newArray(int size) {
+            return new Track[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -192,4 +256,65 @@ public class Track {
         this.type = type;
     }
 
+    @Override
+    public int describeContents() {
+        //nothing special to here
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeByte((byte) (readable == null ? 0 : readable ? 1 : 2));
+        dest.writeString(title);
+        dest.writeString(titleShort);
+        dest.writeString(titleVersion);
+        dest.writeString(isrc);
+        dest.writeString(link);
+        if (duration == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(duration);
+        }
+        if (trackPosition == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(trackPosition);
+        }
+        if (diskNumber == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(diskNumber);
+        }
+        if (rank == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(rank);
+        }
+        dest.writeByte((byte) (explicitLyrics == null ? 0 : explicitLyrics ? 1 : 2));
+        if (explicitContentLyrics == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(explicitContentLyrics);
+        }
+        if (explicitContentCover == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(explicitContentCover);
+        }
+        dest.writeString(preview);
+        dest.writeString(type);
+    }
 }

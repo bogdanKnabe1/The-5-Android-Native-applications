@@ -227,7 +227,7 @@ public class HomeFragment extends Fragment {
                     Log.w(ContentValues.TAG, "onResponse: " + response.errorBody() );
                     loading1.setVisibility(View.GONE);
                     loading2.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 } else {
                     ModelSongList msl = response.body();
                     videoListCharts.addAll(Objects.requireNonNull(msl).getItems());

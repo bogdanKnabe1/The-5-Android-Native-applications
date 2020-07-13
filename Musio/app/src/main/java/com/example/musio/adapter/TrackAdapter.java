@@ -1,7 +1,6 @@
 package com.example.musio.adapter;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.musio.R;
 import com.example.musio.models.deezerData.Artist;
 import com.example.musio.models.deezerData.Track;
-import com.example.musio.utility.MediaPlayerSingleton;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +28,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     public Context context;
 
     public interface OnTrackClickListener {
-        void onTrackClick(String track);
+        void onTrackClick(Track track);
     }
 
     // set the listener. Must be called from the fragment
@@ -110,7 +107,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 Log.e(TAG, "Error", e);
             }
             MediaPlayerSingleton.INSTANCE.mp.start();*/
-            mListener.onTrackClick(track.getPreview());
+            mListener.onTrackClick(track);
         });
 
     }

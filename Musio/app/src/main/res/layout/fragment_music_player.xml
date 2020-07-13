@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/music_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -47,7 +47,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/artist_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -56,7 +56,7 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/music_name">
     </TextView>
 
 
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/artist_name">
 
 
         <androidx.appcompat.widget.AppCompatSeekBar
@@ -86,6 +86,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/durationStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0:00"
@@ -98,6 +99,7 @@
     </TextView>
 
     <TextView
+        android:id="@+id/duration_End"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4:20"

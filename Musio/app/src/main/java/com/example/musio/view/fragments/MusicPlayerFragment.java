@@ -1,34 +1,28 @@
 package com.example.musio.view.fragments;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.musio.R;
-import com.example.musio.utility.MediaPlayerSingleton;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+import com.example.musio.models.deezerData.Track;
 
 import java.io.IOException;
 import java.util.Objects;
-
-import jp.wasabeef.blurry.Blurry;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +34,13 @@ public class MusicPlayerFragment extends Fragment {
     private ConstraintLayout constraintLayout;
     private ImageView playBtn;
     private ImageView pauseBtn;
-    public String track;
+    private TextView musicNameText;
+    private TextView artistNameText;
+    private SeekBar seekBar;
+    private TextView currentTime;
+    private TextView durationEnd;
+    private Track track;
+    private MediaPlayer player;
 
     public MusicPlayerFragment() {
         // Required empty public constructor
@@ -52,30 +52,71 @@ public class MusicPlayerFragment extends Fragment {
         //get Args
         Bundle bundle = getArguments();
 
+        playBtn = v.findViewById(R.id.play_btn);
+        pauseBtn = v.findViewById(R.id.pause_btn);
+        musicNameText = v.findViewById(R.id.music_name);
+        artistNameText = v.findViewById(R.id.artist_name);
+        durationEnd = v.findViewById(R.id.duration_End);
+        currentTime = v.findViewById(R.id.durationStart);
+        seekBar = v.findViewById(R.id.seekbar);
+
+        MediaPlayer player = new MediaPlayer();
+
         if(null != bundle) {
-            track = bundle.getString("key");
+            //init
+            track = bundle.getParcelable("key");
 
             try {
-                MediaPlayerSingleton.INSTANCE.mp.setDataSource(track);
-                MediaPlayerSingleton.INSTANCE.mp.prepare();
+                player.setDataSource(Objects.requireNonNull(track).getPreview());
+                player.prepare();
+
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                        if (fromUser) {
+                            player.seekTo(progress);
+                            seekBar.setProgress(progress);
+                        }
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
+
             } catch (IOException e) {
-                Log.e(TAG, "Error", e);
+                Log.e(TAG, "Error in init player", e);
             }
-            MediaPlayerSingleton.INSTANCE.mp.start();
+
+            musicNameText.setText(track.getTitle());
+            artistNameText.setText(track.getArtist().getName());
+            seekBar.setMax(player.getDuration());
+            durationEnd.setText(getDurationString(track.getDuration()));
+            player.start();
+
 
             //handle pause and play state's
             playBtn.setOnClickListener(v1 -> {
                 playBtn.setVisibility(View.GONE);
                 pauseBtn.setVisibility(View.VISIBLE);
-                MediaPlayerSingleton.INSTANCE.mp.setLooping(true);
-                MediaPlayerSingleton.INSTANCE.mp.start();
+                player.setLooping(true);
+                player.start();
             });
 
             pauseBtn.setOnClickListener(v12 -> {
                 playBtn.setVisibility(View.VISIBLE);
                 pauseBtn.setVisibility(View.GONE);
-                if (MediaPlayerSingleton.INSTANCE.mp.isPlaying()){
-                    MediaPlayerSingleton.INSTANCE.mp.pause();
+                if (player.isPlaying()){
+                    player.pause();
                 }
             });
         }
@@ -83,8 +124,6 @@ public class MusicPlayerFragment extends Fragment {
         //init
         backGroundView = v.findViewById(R.id.imageViewBackground);
         Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
-        playBtn = v.findViewById(R.id.play_btn);
-        pauseBtn = v.findViewById(R.id.pause_btn);
 
         //blur
         backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
@@ -94,6 +133,34 @@ public class MusicPlayerFragment extends Fragment {
     }
 
 
+    public String createTimeLabel(int duration) {
+        String timeLabel = "";
+        int min = duration / 1000 / 60;
+        int sec = duration / 1000 % 60;
+
+        timeLabel += min + ":";
+        if (sec < 10) timeLabel += "0";
+        timeLabel += sec;
+
+        return timeLabel;
+    }
+
+    public String getDurationString(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        seconds = seconds % 60;
+        return  minutes + ":" + twoDigitString(seconds);
+    }
+
+    private String twoDigitString(int number) {
+        if (number == 0) {
+            return "00";
+        }
+        if (number / 10 == 0) {
+            return "0" + number;
+        }
+        return String.valueOf(number);
+    }
 
     //--------------------------------------------------------
     // This is a compromise between Gaussian Blur and Box blur

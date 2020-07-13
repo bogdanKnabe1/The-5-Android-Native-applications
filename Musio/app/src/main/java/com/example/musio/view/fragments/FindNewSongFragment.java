@@ -31,6 +31,7 @@ import com.example.musio.adapter.TrackAdapter;
 import com.example.musio.models.deezerData.DataSearchAlbum;
 import com.example.musio.models.deezerData.DataSearchArtist;
 import com.example.musio.models.deezerData.DataSearchTrack;
+import com.example.musio.models.deezerData.Track;
 import com.example.musio.network.DeezerService;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -215,14 +216,13 @@ public class FindNewSongFragment extends Fragment  {
     }
 
 
-    public void goToMusicPlayer(String track){
+    public void goToMusicPlayer(Track track){
 
         Bundle bundle = new Bundle();
-        bundle.putCharSequence("key", track);
+        bundle.putParcelable("key", track);
 
         MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
         musicPlayerFragment.setArguments(bundle);
-        requireActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(((ViewGroup) requireView().getParent()).getId(), musicPlayerFragment, "musicPlayerFragment")
                 .addToBackStack(null)
