@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musio.R;
+import com.example.musio.models.deezerData.Artist;
 import com.example.musio.models.deezerData.Track;
 import com.example.musio.utility.MediaPlayerSingleton;
 import com.squareup.picasso.Picasso;
@@ -36,6 +37,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textTrackName;
+        private TextView textArtistName;
         private TextView textTrackDuration;
         private ImageButton playButton;
         private ImageView trackImage;
@@ -44,9 +46,10 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            //c'est ici que l'on fait nos findView
-            trackImage = itemView.findViewById(R.id.imageViewTrack);
-            textTrackName = itemView.findViewById(R.id.textTrackName);
+            //set image view's
+            //trackImage = itemView.findViewById(R.id.imageViewTrack);
+            textTrackName = itemView.findViewById(R.id.text_Track_Name);
+            textArtistName = itemView.findViewById(R.id.text_Artist_Name);
             textTrackDuration = itemView.findViewById(R.id.textTrackDuration);
             playButton = itemView.findViewById(R.id.playButton);
         }
@@ -72,12 +75,14 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Track track = listTrack.get(position);
+        Artist artist = listTrack.get(position).getArtist();
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textTrackName.setText(track.getTitle());
+        holder.textArtistName.setText(track.getArtist().getName());
 
-        Picasso.get().load(track.getArtist().getPicture()).into(holder.trackImage);
+        //Picasso.get().load(artist.getPicture()).into(holder.trackImage);
 
         SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.ENGLISH);
         String str = format.format(new Date(track.getDuration()*1000));
