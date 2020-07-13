@@ -4,12 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +21,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.musio.R;
+import com.example.musio.utility.MediaPlayerSingleton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import jp.wasabeef.blurry.Blurry;
@@ -29,8 +34,13 @@ import jp.wasabeef.blurry.Blurry;
  * A simple {@link Fragment} subclass.
  */
 public class MusicPlayerFragment extends Fragment {
+    private static final String TAG = "MusicPlayerFragment";
+
     private ImageView backGroundView;
     private ConstraintLayout constraintLayout;
+    private ImageView playBtn;
+    private ImageView pauseBtn;
+    public String track;
 
     public MusicPlayerFragment() {
         // Required empty public constructor
@@ -39,16 +49,53 @@ public class MusicPlayerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_music_player, container, false); // Inflate the layout for this fragment
+        //get Args
+        Bundle bundle = getArguments();
+
+        if(null != bundle) {
+            track = bundle.getString("key");
+
+            try {
+                MediaPlayerSingleton.INSTANCE.mp.setDataSource(track);
+                MediaPlayerSingleton.INSTANCE.mp.prepare();
+            } catch (IOException e) {
+                Log.e(TAG, "Error", e);
+            }
+            MediaPlayerSingleton.INSTANCE.mp.start();
+
+            //handle pause and play state's
+            playBtn.setOnClickListener(v1 -> {
+                playBtn.setVisibility(View.GONE);
+                pauseBtn.setVisibility(View.VISIBLE);
+                MediaPlayerSingleton.INSTANCE.mp.setLooping(true);
+                MediaPlayerSingleton.INSTANCE.mp.start();
+            });
+
+            pauseBtn.setOnClickListener(v12 -> {
+                playBtn.setVisibility(View.VISIBLE);
+                pauseBtn.setVisibility(View.GONE);
+                if (MediaPlayerSingleton.INSTANCE.mp.isPlaying()){
+                    MediaPlayerSingleton.INSTANCE.mp.pause();
+                }
+            });
+        }
 
         //init
         backGroundView = v.findViewById(R.id.imageViewBackground);
         Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
+        playBtn = v.findViewById(R.id.play_btn);
+        pauseBtn = v.findViewById(R.id.pause_btn);
 
         //blur
         backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
+        //MediaPlayer start when clicked on track in findSearchFragment
+
         return v;
     }
 
+
+
+    //--------------------------------------------------------
     // This is a compromise between Gaussian Blur and Box blur
     // * It creates much better looking blurs than Box Blur, but is
     // * 7x faster than my Gaussian Blur implementation.
@@ -270,6 +317,5 @@ public class MusicPlayerFragment extends Fragment {
 
         return (bitmap);
     }
-
 
 }

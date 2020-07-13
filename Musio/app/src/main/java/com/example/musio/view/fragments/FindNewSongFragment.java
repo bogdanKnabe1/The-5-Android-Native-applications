@@ -17,6 +17,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +35,8 @@ import com.example.musio.network.DeezerService;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static com.android.volley.VolleyLog.TAG;
 
@@ -197,6 +201,7 @@ public class FindNewSongFragment extends Fragment  {
         Response.Listener<DataSearchTrack> rep = response -> {
             Log.d(TAG, "searchTrack Found " + response.getTotal() + " track");
             TrackAdapter mAdapter = new TrackAdapter(response.getData());
+            mAdapter.setListener(this::goToMusicPlayer);
             recyclerViewTrack.setAdapter(mAdapter);
             hideProgress();
         };
@@ -210,6 +215,20 @@ public class FindNewSongFragment extends Fragment  {
     }
 
 
+    public void goToMusicPlayer(String track){
+
+        Bundle bundle = new Bundle();
+        bundle.putCharSequence("key", track);
+
+        MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
+        musicPlayerFragment.setArguments(bundle);
+        requireActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(((ViewGroup) requireView().getParent()).getId(), musicPlayerFragment, "musicPlayerFragment")
+                .addToBackStack(null)
+                .commit();
+
+    }
 
     //ProgressBar
     private void showProgress() {

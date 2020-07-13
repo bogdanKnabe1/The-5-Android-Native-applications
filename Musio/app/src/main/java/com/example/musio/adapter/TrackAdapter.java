@@ -16,7 +16,6 @@ import com.example.musio.R;
 import com.example.musio.models.deezerData.Artist;
 import com.example.musio.models.deezerData.Track;
 import com.example.musio.utility.MediaPlayerSingleton;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -28,8 +27,18 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     private static final String TAG = "AdapterAlbum";
 
     private List<Track> listTrack;
-
+    OnTrackClickListener mListener;
     public Context context;
+
+    public interface OnTrackClickListener {
+        void onTrackClick(String track);
+    }
+
+    // set the listener. Must be called from the fragment
+    public void setListener(OnTrackClickListener listener) {
+        this.mListener = listener;
+    }
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -92,15 +101,16 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         holder.playButton.setOnClickListener(view -> {
             Log.d(TAG, "click on <" + track.getTitle()+ ">");
             Log.d(TAG, "url : " + track.getPreview());
-            MediaPlayerSingleton.INSTANCE.mp.reset();
-            MediaPlayerSingleton.INSTANCE.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            //MediaPlayerSingleton.INSTANCE.mp.reset();
+            /*MediaPlayerSingleton.INSTANCE.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
                 MediaPlayerSingleton.INSTANCE.mp.setDataSource(track.getPreview());
                 MediaPlayerSingleton.INSTANCE.mp.prepare();
             } catch (IOException e) {
                 Log.e(TAG, "Error", e);
             }
-            MediaPlayerSingleton.INSTANCE.mp.start();
+            MediaPlayerSingleton.INSTANCE.mp.start();*/
+            mListener.onTrackClick(track.getPreview());
         });
 
     }
