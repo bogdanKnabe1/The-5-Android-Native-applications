@@ -17,17 +17,69 @@
   Musio is a simple music streaming service that implements many basic concepts for building an android application. Here are used:
   - RecyclerView
   - Picasso
-  - Retrofit
+  - Retrofit(now Volley)
+  - BottomNavigationView
+  - CircleImageView
   - Single activity pattern
   - REST api
-  - and many other and many other small features
+  - and many other and many other small features like blurred background custom toolbar etc.
+  
+  Now we have:
+  - Implemented Search sond fragment and Music player fragment
+  - We can find any song and listn it
+  - We have simple music player and we can extend it with more fetures in future
+  - We have simple UI with more flexibility.
+  - A very clear UI construction scheme based on our architecture. We have one activity which contains a container in which the necessary fragments (screens) are replaced
+  - Implemented fragment communication with out ViewModel library.
+  - And many other small things can be finded in this project.
+  
+  Would be implement in future:
+  - Network with Retrofit
+  - Naviation library from jetpack for more cleaner code related to fragments and user experience
+  - Implement Home screen and Albums screen
+  - User profile and registration
+  
+  Some pictures of Musio
+  
+  ![MusioMusicPlayer](https://user-images.githubusercontent.com/47458290/87451151-26ba4100-c608-11ea-9676-4d1626a463f6.png)
+  
+  ![MusioSearch](https://user-images.githubusercontent.com/47458290/87451158-291c9b00-c608-11ea-9258-583d2ada1cae.png)
+  
+  ![musioTrackList](https://user-images.githubusercontent.com/47458290/87451164-2ae65e80-c608-11ea-8d35-358a61f7d5ff.png)
 
   ## FlexPicture app
   
   FlexPicture - this is a very simple application that essentially has only one screen, the whole point in the algorithm for selecting images. 
   The application provides a simple interface where the user is shown pictures on topics that are of interest to him and depending on the choice, the application itself decides   which picture to show next. Factors can be many things from the real world, for example: politics, culture, pop culture, music, etc.
+  
+  Used:
+  - ViewModel Jetpack library
+  - Navigation 
+  - CardStackView
+  - BottomNavigationView
 
+  Now we have:
+  - Implemented Card stack view(which it is possible to flip in different directions of the card)
 
+  ## Purable app (Named TaxiX)
+  
+  TaxiX - it’s just a taxi client that allows you to work with such important components as cards, authentication, saving states, transferring and saving information.
+  The application essentially composes the main screen on which the map is displayed, the driver who is registered in the system. 
+  The map shows the places with the greatest demand for trips, they are updated in real time and allow the driver to receive the greatest benefit. 
+
+  Used:
+  - Firebase authentication
+  - Firebase realtime database
+  - RxJava for requests and some background work
+  - Jetpack: Navigation, NavigationUi, lifecycle-extensions
+  - Google map
+  
+  Now we have:
+  - Simple authentication with phone and gmail
+  - Working map
+  - Navigation drawer
+  - Splash screen
+  
   ## Connection
 
   Reach out to me at one of the following places!
