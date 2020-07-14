@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,10 +24,12 @@ import com.example.musio.R;
 import com.example.musio.models.deezerData.Album;
 import com.example.musio.models.deezerData.Track;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Objects;
@@ -73,7 +76,6 @@ public class MusicPlayerFragment extends Fragment {
 
         //init
         backGroundView = v.findViewById(R.id.imageViewBackground);
-        Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
 
         MediaPlayer player = new MediaPlayer();
 
@@ -134,6 +136,24 @@ public class MusicPlayerFragment extends Fragment {
                 Log.e(TAG, "Error in init player", e);
             }
             Picasso.get().load(album.getCoverMedium()).into(roundedImagePreview);
+            //blur set image on background
+
+            Picasso.get().load(album.getCoverBig()).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    // loaded bitmap is here (bitmap)
+                    backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
+                }
+
+                @Override
+                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                }
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {}
+            });
+
+
 
             musicNameText.setText(track.getTitle());
             artistNameText.setText(track.getArtist().getName());
@@ -142,8 +162,6 @@ public class MusicPlayerFragment extends Fragment {
             player.start();
 
 
-            //blur set image on background //
-            //backGroundView.setImageBitmap(fastblur(loadBitmap(album.getCoverBig()), 0.4f, 21));
 
             //handle pause and play state's
             playBtn.setOnClickListener(v1 -> {
@@ -163,54 +181,15 @@ public class MusicPlayerFragment extends Fragment {
         }
 
         //blur set static img
+        Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
         backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
 
         return v;
     }
 
     //Convert bitmap method.
-    private Bitmap loadBitmap(String url) {
-        Bitmap bm = null;
-        InputStream is = null;
-        BufferedInputStream bis = null;
-        try
-        {
-            URLConnection conn = new URL(url).openConnection();
-            conn.connect();
-            is = conn.getInputStream();
-            bis = new BufferedInputStream(is, 8192);
-            bm = BitmapFactory.decodeStream(bis);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally {
-            if (bis != null)
-            {
-                try
-                {
-                    bis.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            if (is != null)
-            {
-                try
-                {
-                    is.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return bm;
-    }
+
+
 
     private String createTimeLabel(int duration) {
         String timeLabel = "";
