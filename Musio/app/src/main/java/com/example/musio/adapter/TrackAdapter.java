@@ -97,15 +97,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         holder.playButton.setOnClickListener(view -> {
             Log.d(TAG, "click on <" + track.getTitle()+ ">");
             Log.d(TAG, "url : " + track.getPreview());
-            //MediaPlayerSingleton.INSTANCE.mp.reset();
-            /*MediaPlayerSingleton.INSTANCE.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            try {
-                MediaPlayerSingleton.INSTANCE.mp.setDataSource(track.getPreview());
-                MediaPlayerSingleton.INSTANCE.mp.prepare();
-            } catch (IOException e) {
-                Log.e(TAG, "Error", e);
-            }
-            MediaPlayerSingleton.INSTANCE.mp.start();*/
             mListener.onTrackClick(track);
         });
 

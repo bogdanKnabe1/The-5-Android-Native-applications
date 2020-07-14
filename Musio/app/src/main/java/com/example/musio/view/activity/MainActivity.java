@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -107,6 +108,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
+    /*//onBackPress button handle
+    @Override
+    public void onBackPressed() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        int selectedItemId = bottomNavigationView.getSelectedItemId();
+        if (R.id.home != selectedItemId) {
+            setHomeItem(MainActivity.this);
+        } else {
+            super.onBackPressed();
+        }
+    }
+    //set HOME
+    public static void setHomeItem(Activity activity) {
+        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+    }*/
 
     public void setFragment(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

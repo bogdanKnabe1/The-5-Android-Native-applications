@@ -1,10 +1,13 @@
 
 package com.example.musio.models.deezerData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Artist {
+public class Artist implements Parcelable {
 
     @SerializedName("id")
     private Long mId;
@@ -32,6 +35,47 @@ public class Artist {
     private String mTracklist;
     @SerializedName("type")
     private String mType;
+
+    protected Artist(Parcel in) {
+        if (in.readByte() == 0) {
+            mId = null;
+        } else {
+            mId = in.readLong();
+        }
+        mLink = in.readString();
+        mName = in.readString();
+        if (in.readByte() == 0) {
+            mNbAlbum = null;
+        } else {
+            mNbAlbum = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            mNbFan = null;
+        } else {
+            mNbFan = in.readLong();
+        }
+        mPicture = in.readString();
+        mPictureBig = in.readString();
+        mPictureMedium = in.readString();
+        mPictureSmall = in.readString();
+        mPictureXl = in.readString();
+        byte tmpMRadio = in.readByte();
+        mRadio = tmpMRadio == 0 ? null : tmpMRadio == 1;
+        mTracklist = in.readString();
+        mType = in.readString();
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
 
     public Long getId() {
         return mId;
@@ -137,4 +181,40 @@ public class Artist {
         mType = type;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (mId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(mId);
+        }
+        dest.writeString(mLink);
+        dest.writeString(mName);
+        if (mNbAlbum == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(mNbAlbum);
+        }
+        if (mNbFan == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(mNbFan);
+        }
+        dest.writeString(mPicture);
+        dest.writeString(mPictureBig);
+        dest.writeString(mPictureMedium);
+        dest.writeString(mPictureSmall);
+        dest.writeString(mPictureXl);
+        dest.writeByte((byte) (mRadio == null ? 0 : mRadio ? 1 : 2));
+        dest.writeString(mTracklist);
+        dest.writeString(mType);
+    }
 }

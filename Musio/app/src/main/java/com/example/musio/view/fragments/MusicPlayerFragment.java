@@ -94,18 +94,11 @@ public class MusicPlayerFragment extends Fragment {
                             player.seekTo(progress);
                             seekBar.setProgress(progress);
                         }
-
                     }
-
                     @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
                     @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
                 });
 
                 @SuppressLint("HandlerLeak")
