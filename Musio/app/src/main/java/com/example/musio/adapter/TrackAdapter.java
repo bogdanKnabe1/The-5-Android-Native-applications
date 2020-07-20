@@ -96,7 +96,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
 
         holder.playButton.setOnClickListener(view -> {
             Log.d(TAG, "click on <" + track.getTitle()+ ">");
-            Log.d(TAG, "url : " + track.getPreview());
+            Log.d(TAG, "url : " + track.getLink());
             mListener.onTrackClick(track);
         });
 
