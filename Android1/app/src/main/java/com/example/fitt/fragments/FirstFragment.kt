@@ -53,6 +53,7 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
         //manage visibility
         recyclerView.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
+
         //transition to another fragment
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
