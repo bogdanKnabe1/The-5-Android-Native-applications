@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musio.R;
-import com.example.musio.models.deezerData.Artist;
 import com.example.musio.models.deezerData.Track;
 
 import java.text.SimpleDateFormat;
