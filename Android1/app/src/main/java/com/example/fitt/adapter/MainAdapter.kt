@@ -20,7 +20,7 @@ class MainAdapter(
         private val reminderDataList: List<ReminderData>?
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
-    private val dateFormat = SimpleDateFormat("h:mma", Locale.getDefault());
+    private val dateFormat = SimpleDateFormat("h:mma", Locale.getDefault())
 
     interface OnClickReminderListener {
         fun onClick(reminderData: ReminderData)
@@ -34,26 +34,30 @@ class MainAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         if (reminderDataList != null) {
+            //getting data from list, i = position
             val reminderData = reminderDataList[i]
-
+            //set name
             viewHolder.textViewName.text = reminderData.name
+            //get data
             val date = Calendar.getInstance()
             date.set(Calendar.HOUR_OF_DAY, reminderData.hour)
             date.set(Calendar.MINUTE, reminderData.minute)
-            viewHolder.textViewTimeToAdminister.text = dateFormat.format(date.time).toLowerCase()
-
+            //set time
+            viewHolder.textViewTimeToAdminister.text = dateFormat.format(date.time).toLowerCase(Locale.ROOT)
+            //?
             var daysText = reminderData.days.toString()
             daysText = daysText.replace("[", "")
             daysText = daysText.replace("]", "")
             daysText = daysText.replace(",", " ·")
+            //set day
             viewHolder.textViewDays.text = daysText
-
-            val drawable = when {
-                reminderData.type == WorkoutType.Swimming -> ContextCompat.getDrawable(
+            //find drawable
+            val drawable = when (reminderData.type) {
+                WorkoutType.Swimming -> ContextCompat.getDrawable(
                         viewHolder.imageViewIcon.context,
                         R.drawable.ic_swimming
                 )
-                reminderData.type == WorkoutType.Cycling -> ContextCompat.getDrawable(
+                WorkoutType.Cycling -> ContextCompat.getDrawable(
                         viewHolder.imageViewIcon.context,
                         R.drawable.ic_bicycle
                 )
@@ -62,8 +66,10 @@ class MainAdapter(
                         R.drawable.ic_run
                 )
             }
+            //set drawable
             viewHolder.imageViewIcon.setImageDrawable(drawable)
 
+            //pass data to fragment with onClick
             viewHolder.itemView.setOnClickListener {
                 listener.onClick(reminderData)
             }
@@ -75,22 +81,13 @@ class MainAdapter(
         return reminderDataList?.size ?: 0
     }
 
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //find all view's
+        var imageViewIcon: ImageView = itemView.findViewById(R.id.imageViewIcon)
+        var textViewName: TextView = itemView.findViewById(R.id.textViewName)
+        var textViewTimeToAdminister: TextView = itemView.findViewById(R.id.textViewTimeToAdminister)
+        var textViewDays: TextView = itemView.findViewById(R.id.textViewDays)
+        var checkBoxAdministered: CheckBox = itemView.findViewById(R.id.checkBoxAdministered)
 
-        var imageViewIcon: ImageView
-        var textViewName: TextView
-        var textViewTimeToAdminister: TextView
-        var textViewDays: TextView
-        var checkBoxAdministered: CheckBox
-
-        init {
-
-            imageViewIcon = itemView.findViewById(R.id.imageViewIcon)
-            textViewName = itemView.findViewById(R.id.textViewName)
-            textViewTimeToAdminister = itemView.findViewById(R.id.textViewTimeToAdminister)
-            textViewDays = itemView.findViewById(R.id.textViewDays)
-            checkBoxAdministered = itemView.findViewById(R.id.checkBoxAdministered)
-        }
     }
 }

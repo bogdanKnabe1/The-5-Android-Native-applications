@@ -33,23 +33,27 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //When we didn't add new trainings
         textViewNoReminders = view.findViewById(R.id.textViewNoReminders)
+        //Progress bar
         progressBar = view.findViewById(R.id.progressBar)
+        //recyclerView
         recyclerView = view.findViewById(R.id.recyclerViewReminders)
-
+        //adding item decoration
         recyclerView.addItemDecoration(
                 DividerItemDecoration(
                         view.context,
                         DividerItemDecoration.VERTICAL
                 )
         )
-
+        //init adapter for data
         mainAdapter = MainAdapter(this, ReminderRepository.getMockRepository())
+        //set adapter to recycler
         recyclerView.adapter = mainAdapter
+        //manage visibility
         recyclerView.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
-
+        //transition to another fragment
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
