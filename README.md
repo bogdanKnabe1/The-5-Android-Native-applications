@@ -2,7 +2,7 @@
   ![ttystudio GIF](https://media.giphy.com/media/llarwdtFqG63IlqUR1/giphy.gif)
 
   # 4-Android-Native-Applications
-  > The 4 Android Native applications with out any external libraries. Using vanilla java and android SDK.
+  > The 5 Android Native applications with out any external libraries. Using vanilla java/kotlin and android SDK.
 
   |  #  |            Project             | STATUS |
   | :-: | :----------------------------: | :-------: |
@@ -79,6 +79,10 @@
   - Working map
   - Navigation drawer
   - Splash screen
+  
+  ## Android1 (Named Fitt)
+  
+  Fitt - simple fitness calendar this is just an application written in Kotlin as a training project.
   
   ## Connection
 
