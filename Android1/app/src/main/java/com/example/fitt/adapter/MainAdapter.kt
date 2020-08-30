@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
-import com.example.fitt.data.ReminderData
-import com.example.fitt.data.WorkoutType
+import com.example.fitt.repository.ReminderData
+import com.example.fitt.repository.WorkoutType
 import java.text.SimpleDateFormat
 import java.util.*
 

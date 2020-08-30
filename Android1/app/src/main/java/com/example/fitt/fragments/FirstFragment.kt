@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
 import com.example.fitt.adapter.MainAdapter
-import com.example.fitt.data.ReminderData
 import com.example.fitt.notification.NotificationHelper
-import com.example.fitt.repository.ReminderRepository
+import com.example.fitt.repository.ReminderData
+import com.example.fitt.repository.ReminderLocalRepository
 import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
@@ -48,8 +48,7 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
                 )
         )
         //init adapter for data
-        mainAdapter = MainAdapter(this, ReminderRepository.getMockRepository())
-        //set adapter to recycler
+        mainAdapter = MainAdapter(this, ReminderLocalRepository(activity?.applicationContext).getReminders())//set adapter to recycler
         recyclerView.adapter = mainAdapter
         //manage visibility
         recyclerView.visibility = View.VISIBLE

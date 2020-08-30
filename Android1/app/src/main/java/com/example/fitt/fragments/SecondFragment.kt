@@ -10,8 +10,9 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.fitt.R
-import com.example.fitt.data.ReminderData
-import com.example.fitt.data.WorkoutType
+import com.example.fitt.repository.ReminderData
+import com.example.fitt.repository.ReminderLocalRepository
+import com.example.fitt.repository.WorkoutType
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_second.*
 import java.text.SimpleDateFormat
@@ -167,14 +168,14 @@ class SecondFragment : Fragment() {
             }
         }
     }
+
     //create obj Reminder
     fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
         reminderData.name = name
         reminderData.type = dateType
         reminderData.days = days
 
-        // TODO Сохранение информации в БД
-        return 0
+        return ReminderLocalRepository(activity?.applicationContext).saveReminder(reminderData)
     }
     //function to build all checkboxes
     private fun buildCheckBoxes(linearLayoutDates: LinearLayout) {

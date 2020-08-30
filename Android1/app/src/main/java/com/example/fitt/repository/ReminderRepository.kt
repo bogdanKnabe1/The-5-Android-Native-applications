@@ -1,7 +1,5 @@
 package com.example.fitt.repository
 
-import com.example.fitt.data.ReminderData
-
 object ReminderRepository {
 
     fun getMockRepository(): List<ReminderData> {
