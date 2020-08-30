@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
 import com.example.fitt.adapter.MainAdapter
 import com.example.fitt.data.ReminderData
+import com.example.fitt.notification.NotificationHelper
 import com.example.fitt.repository.ReminderRepository
 import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -56,6 +57,9 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
 
         //transition to another fragment
         fab.setOnClickListener {
+            NotificationHelper.createSampleDataNotification(
+                    view.context, "Супер Уведомление", "Это уведомление для провеки", "", true
+            )
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

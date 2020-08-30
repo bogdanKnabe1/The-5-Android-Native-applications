@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -69,19 +70,26 @@ object  NotificationHelper {
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
         // 2 - for creating notification using NotificationCompat.Builder + scope fun .apply
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_fitnes) // 3 - The only required parameter when creating a notification is the icon.
+            setSmallIcon(R.drawable.ic_fitt_sample) // 3 - The only required parameter when creating a notification is the icon.
             setContentTitle(title) // 4 - title
             setContentText(message) // 5 - message
             setAutoCancel(autoCancel) // 6 - Setting this flag will make it so the notification is automatically * canceled when the user clicks it in the panel.
             setStyle(NotificationCompat.BigTextStyle().bigText(bigText)) // 7
             priority = NotificationCompat.PRIORITY_DEFAULT // 8
+            color = Color.GREEN
 
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-            setContentIntent(pendingIntent)
+            // Create intent and PendingIntent to open main screen
+            val intent = Intent(context, MainActivity::class.java) // 1 - Intent create
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // 2 - Set flags for the launchMode in which the application will be launched
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0) // 3 - We wrap the Intent in a PendingIntent, using the getActivity () method to get the Activity to be started.
+            setContentIntent(pendingIntent) // 4 - We call the setContentIntent () method to pass the created PendingIntent to the NotificationCompat.Builder to call it when the user clicks on the notification.
         }
 
+
+        /**
+        Here we get a link to the NotificationManagerCompat and call the notify () method to display a notification,
+        where 1001 is just a certain id, which is required, and notificationBuilder.build (), as a result,
+        creates a notification that we have carefully constructed. */
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(1001, notificationBuilder.build())
     }
