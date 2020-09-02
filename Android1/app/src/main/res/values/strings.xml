@@ -25,6 +25,8 @@
     <string name="time_ru">Время</string>
     <string name="type_of_training_ru">Тип</string>
 
+    <string name="group_notification_for">Это уведомление для группы %s </string>
+
     <string-array name="days">
         <item>Понедельник</item>
         <item>Вторник</item>

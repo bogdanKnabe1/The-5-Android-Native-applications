@@ -6,20 +6,20 @@ object ReminderRepository {
         val swimming = ReminderData(
                 id = 0,
                 name = "Плавание",
-                days = listOf<String>("Понедельник", "Среда", "Пятница")
+                days = listOf("Понедельник", "Среда", "Пятница")
         )
 
         val running = ReminderData(
                 id = 0,
                 name = "Бег",
-                days = listOf<String>("Вторник", "Четверг", "Суббота")
+                days = listOf("Вторник", "Четверг", "Суббота")
         )
 
         val cycling = ReminderData(
                 id = 0,
                 name = "Езда на велосипеде",
-                days = listOf<String>("Понедельник", "Вторник")
+                days = listOf("Понедельник", "Вторник")
         )
-        return listOf<ReminderData>(swimming, running, cycling)
+        return listOf(swimming, running, cycling)
     }
 }

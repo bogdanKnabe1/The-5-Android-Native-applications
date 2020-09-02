@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
 import com.example.fitt.adapter.MainAdapter
-import com.example.fitt.notification.NotificationHelper
 import com.example.fitt.repository.ReminderData
 import com.example.fitt.repository.ReminderLocalRepository
 import kotlinx.android.synthetic.main.fragment_first.*
@@ -47,7 +46,7 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
                         DividerItemDecoration.VERTICAL
                 )
         )
-        //init adapter for data
+        //init adapter for data FROM ROOM DATABASE
         mainAdapter = MainAdapter(this, ReminderLocalRepository(activity?.applicationContext).getReminders())//set adapter to recycler
         recyclerView.adapter = mainAdapter
         //manage visibility
@@ -56,9 +55,6 @@ class FirstFragment : Fragment(), MainAdapter.OnClickReminderListener {
 
         //transition to another fragment
         fab.setOnClickListener {
-            NotificationHelper.createSampleDataNotification(
-                    view.context, "Супер Уведомление", "Это уведомление для провеки", "", true
-            )
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

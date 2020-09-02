@@ -7,11 +7,15 @@ class ReminderLocalRepository(val context: Context?) {
 
     private val roomDatabase = (context?.applicationContext as FittApp).getDatabase()
     private val dao = roomDatabase.reminderDataDao()
-
+    //to get ALL data in list
     fun getReminders(): List<ReminderData> {
         return dao.getReminderData()
     }
-
+    //to get data by ID
+    fun getReminderById(id: Long): ReminderData? {
+        return dao.getReminderById(id)
+    }
+    //to save data in database
     fun saveReminder(reminderData:ReminderData):Long{
         return dao.insert(reminderData)
     }

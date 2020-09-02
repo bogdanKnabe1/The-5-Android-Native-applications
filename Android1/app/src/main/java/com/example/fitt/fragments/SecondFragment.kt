@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.fitt.R
+import com.example.fitt.notification.AlarmScheduler
 import com.example.fitt.repository.ReminderData
 import com.example.fitt.repository.ReminderLocalRepository
 import com.example.fitt.repository.WorkoutType
@@ -17,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_second.*
 import java.text.SimpleDateFormat
 import java.util.*
+
+const val KEY_ID = "id"
 
 class SecondFragment : Fragment() {
 
@@ -84,6 +87,16 @@ class SecondFragment : Fragment() {
                         dateType = dateType,
                         days = daysItems.filter { !it.isNullOrEmpty() }.toList()
                 )
+
+                val reminder =
+                        ReminderLocalRepository(activity?.applicationContext).getReminderById(id)
+
+                AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder!!)
+                Snackbar.make(
+                        view,
+                        "Напоминание о тренировке создано!",
+                        Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }
