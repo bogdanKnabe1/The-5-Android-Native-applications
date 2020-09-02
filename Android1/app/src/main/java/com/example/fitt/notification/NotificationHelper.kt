@@ -106,9 +106,9 @@ object NotificationHelper {
         // 3
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(reminderData.type.ordinal, groupBuilder.build())
-        notificationManager.notify(reminderData.id, notificationBuilder.build())
+        notificationManager.notify(reminderData.id.toInt(), notificationBuilder.build())
     }
-
+    //build single notification
     private fun buildGroupNotification(
             context: Context,
             reminderData: ReminderData
@@ -150,9 +150,11 @@ object NotificationHelper {
 
         // 2 - for creating notification using NotificationCompat.Builder + scope fun .apply
         return NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_fitnes)// 3 - The only required parameter when creating a notification is the icon.
-            setContentTitle(reminderData.name)// 4 - title
-            setAutoCancel(true)// 5 - Setting this flag will make it so the notification is automatically * canceled when the user clicks it in the panel.
+
+            //BUILD notification
+            setSmallIcon(R.drawable.ic_fitnes)// 1 - The only required parameter when creating a notification is the icon.
+            setContentTitle(reminderData.name)// 2 - title
+            setAutoCancel(true)// 3 - Setting this flag will make it so the notification is automatically * canceled when the user clicks it in the panel.
 
             // get a drawable reference for the LargeIcon
             val drawable = when (reminderData.type) {
@@ -160,9 +162,9 @@ object NotificationHelper {
                 WorkoutType.Cycling -> R.drawable.ic_bicycle
                 else -> R.drawable.ic_swimming
             }
-            setLargeIcon(BitmapFactory.decodeResource(context.resources, drawable))
-            setContentText("${reminderData.name}")
-            setGroup(reminderData.type.name)
+            setLargeIcon(BitmapFactory.decodeResource(context.resources, drawable)) // 4 - set large icon
+            setContentText("${reminderData.name}") // 5 - set content text
+            setGroup(reminderData.type.name) // 6 - set group name
 
             // Launches the app to open the reminder edit screen when tapping the whole notification. // 1 - Intent create, 2 - set flags to launchMode
             val intent = Intent(context, MainActivity::class.java).apply {
@@ -171,7 +173,8 @@ object NotificationHelper {
             }
             // 3 - then wrap with PendingIntent
             val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-            setContentIntent(pendingIntent)
+            setContentIntent(pendingIntent) // 7 - will take care of opening activity when notification clicked
+
         }
     }
 }

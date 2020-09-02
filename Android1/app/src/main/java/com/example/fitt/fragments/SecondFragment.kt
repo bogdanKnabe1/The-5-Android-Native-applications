@@ -112,7 +112,7 @@ class SecondFragment : Fragment() {
     //function which one is invoked when we click on Time selection
     private fun timeTapped() {
         reminderData = ReminderData()
-        if (reminderData.id != 0) {
+        if (reminderData.id != 0L) {
             displayTimeDialog(reminderData.hour, reminderData.minute)
         } else {
             val date = Calendar.getInstance()

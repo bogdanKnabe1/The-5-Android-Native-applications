@@ -13,7 +13,7 @@ Let's look at two examples. An entity class in Kotlin with and without the Parce
 @Parcelize
 data class ReminderData(
         @PrimaryKey(autoGenerate = true)
-        var id: Int = 0,
+        var id: Long = 0,
         var name: String? = null,
         var type: WorkoutType = WorkoutType.Running,
         var hour: Int = 0,
