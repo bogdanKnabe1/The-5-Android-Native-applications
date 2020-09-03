@@ -19,4 +19,12 @@ class ReminderLocalRepository(val context: Context?) {
     fun saveReminder(reminderData:ReminderData):Long{
         return dao.insert(reminderData)
     }
+
+    fun deleteById(reminderData: ReminderData) {
+        return dao.deleteById(reminderData.id)
+    }
+
+    fun deleteAll() {
+        return dao.deleteAll()
+    }
 }
