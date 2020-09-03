@@ -3,6 +3,7 @@ package com.example.fitt.notification
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import com.example.fitt.fragments.KEY_ID
 import com.example.fitt.repository.ReminderLocalRepository
@@ -17,7 +18,12 @@ class AlarmReceiver : BroadcastReceiver() {
             if (intent.extras != null) {
                 val reminderData = ReminderLocalRepository(context).getReminderById(intent.extras!!.getLong(KEY_ID))
                 if (reminderData != null) {
-                    NotificationHelper.createNotificationForWorkout(context, reminderData)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        NotificationHelper.createNotificationForWorkout(context,reminderData)
+                    } else {
+                        NotificationHelper.createNotificationForOldDevices(context, reminderData)
+                    }
+
                 }
             }
         }
