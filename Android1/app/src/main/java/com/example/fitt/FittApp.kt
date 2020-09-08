@@ -26,7 +26,6 @@ class FittApp : Application() {
         super.onCreate()
         // Use ApplicationContext.
         // example: SharedPreferences etc...
-        val context: Context = applicationContext()
 
         /* Please note that when creating a notification channel,
         you must specify the so-called level of importance of the channel.

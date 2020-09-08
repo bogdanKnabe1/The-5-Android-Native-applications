@@ -15,15 +15,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 //Adapter for main list of tasks
-class MainAdapter() : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private var reminderDataList = emptyList<ReminderData>()
 
     private val dateFormat = SimpleDateFormat("h:mma", Locale.getDefault())
 
-    interface OnClickReminderListener {
-        fun onClick(reminderData: ReminderData)
-    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)

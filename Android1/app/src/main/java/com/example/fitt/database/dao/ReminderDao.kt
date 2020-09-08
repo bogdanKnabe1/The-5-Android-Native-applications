@@ -21,9 +21,6 @@ interface ReminderDao {
     @Query("SELECT * from reminder_data where id= :id")
     fun getReminderById(id: Long): ReminderData
 
-    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(reminders: List<ReminderData>)*/
-
     @Query("DELETE FROM reminder_data where id LIKE :id")
     suspend fun deleteById(id: Long)
 
