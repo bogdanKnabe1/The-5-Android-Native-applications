@@ -1,13 +1,17 @@
-package com.example.fitt.repository
+package com.example.fitt.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.fitt.database.dao.ReminderDao
+import com.example.fitt.database.entity.ReminderData
 import com.example.fitt.utils.DaysConverter
 import com.example.fitt.utils.WorkoutTypeConverter
 
 //database creation + version
-@Database(entities = [ReminderData::class], version = 1)
+@Database(entities = [ReminderData::class], version = 2)
 //links to converters
 @TypeConverters(WorkoutTypeConverter::class, DaysConverter::class)
 /* To save training types (Running / Swimming / Cycling), you need to write the corresponding data converter
@@ -16,4 +20,5 @@ a converter from a list of lines to a line is needed - this is the easiest way t
 abstract class WorkoutDatabase : RoomDatabase() {
 
     abstract fun reminderDataDao(): ReminderDao
+
 }

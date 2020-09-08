@@ -1,7 +1,6 @@
 package com.example.fitt.utils
 
 import androidx.room.TypeConverter
-import com.example.fitt.repository.WorkoutType
 
 class WorkoutTypeConverter {
     @TypeConverter

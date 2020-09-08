@@ -12,7 +12,7 @@
         android:id="@+id/recyclerViewReminders"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

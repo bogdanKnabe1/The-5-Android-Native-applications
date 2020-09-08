@@ -9,17 +9,18 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.fitt.R
+import com.example.fitt.database.entity.ReminderData
 import com.example.fitt.notification.AlarmScheduler
-import com.example.fitt.repository.ReminderData
 import com.example.fitt.repository.ReminderLocalRepository
-import com.example.fitt.repository.WorkoutType
+import com.example.fitt.utils.WorkoutType
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-const val KEY_ID = "id"
 
 class SecondFragment : Fragment() {
 
@@ -81,17 +82,20 @@ class SecondFragment : Fragment() {
                         }
                     }
                 }
+
+                //Coroutine for save in database using createReminder
+                lifecycleScope.launch {
                 //create reminder and save to database
                 val id = createReminder(
                         name = name,
                         dateType = dateType,
                         days = daysItems.filter { !it.isNullOrEmpty() }.toList()
                 )
+                    val reminder = ReminderLocalRepository(activity?.applicationContext).getReminderById(id)
 
-                val reminder =
-                        ReminderLocalRepository(activity?.applicationContext).getReminderById(id)
+                    AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder!!)
+                }
 
-                AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder!!)
                 Snackbar.make(
                         view,
                         "Напоминание о тренировке создано!",
@@ -100,6 +104,7 @@ class SecondFragment : Fragment() {
             }
         }
     }
+
     //set text with current data to timeButton
     private fun setTimeButtonText(hourOfDay: Int, minute: Int) {
         val calendar = Calendar.getInstance()
@@ -183,13 +188,14 @@ class SecondFragment : Fragment() {
     }
 
     //create obj Reminder
-    fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
+    suspend fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
         reminderData.name = name
         reminderData.type = dateType
         reminderData.days = days
 
         return ReminderLocalRepository(activity?.applicationContext).saveReminder(reminderData)
     }
+
     //function to build all checkboxes
     private fun buildCheckBoxes(linearLayoutDates: LinearLayout) {
         linearLayoutDates.removeAllViews()

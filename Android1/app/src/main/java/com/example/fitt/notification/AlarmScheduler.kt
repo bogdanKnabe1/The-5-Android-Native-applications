@@ -5,8 +5,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.example.fitt.R
-import com.example.fitt.fragments.KEY_ID
-import com.example.fitt.repository.ReminderData
+import com.example.fitt.database.entity.ReminderData
+import com.example.fitt.utils.KEY_ID
 import java.util.*
 
 object AlarmScheduler {

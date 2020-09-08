@@ -9,15 +9,15 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
-import com.example.fitt.repository.ReminderData
-import com.example.fitt.repository.WorkoutType
+import com.example.fitt.database.entity.ReminderData
+import com.example.fitt.utils.WorkoutType
 import java.text.SimpleDateFormat
 import java.util.*
 
 //Adapter for main list of tasks
 class MainAdapter(
         private val listener: OnClickReminderListener,
-        private val reminderDataList: List<ReminderData>?
+        private val reminderDataList: MutableList<ReminderData>?
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private val dateFormat = SimpleDateFormat("h:mma", Locale.getDefault())
@@ -88,6 +88,5 @@ class MainAdapter(
         var textViewTimeToAdminister: TextView = itemView.findViewById(R.id.textViewTimeToAdminister)
         var textViewDays: TextView = itemView.findViewById(R.id.textViewDays)
         var checkBoxAdministered: CheckBox = itemView.findViewById(R.id.checkBoxAdministered)
-
     }
 }

@@ -3,9 +3,9 @@ package com.example.fitt
 import android.app.Application
 import androidx.core.app.NotificationManagerCompat
 import androidx.room.Room
+import com.example.fitt.database.WorkoutDatabase
 import com.example.fitt.notification.NotificationHelper
-import com.example.fitt.repository.WorkoutDatabase
-import com.example.fitt.repository.WorkoutType
+import com.example.fitt.utils.WorkoutType
 
 //SINGLETON
 class FittApp : Application() {
@@ -23,6 +23,8 @@ class FittApp : Application() {
         in a real application this should be avoided - since read operations from the database can be long and you will get ANR
         Change on COROUTINE */
                 .allowMainThreadQueries()
+                //DESTRUCT MIGRATION
+                .fallbackToDestructiveMigration()
                 .build()
 
         /* Please note that when creating a notification channel,
@@ -57,7 +59,7 @@ class FittApp : Application() {
         return app
     }
 
-    fun getDatabase(): WorkoutDatabase {
+   fun getDatabase(): WorkoutDatabase {
         return database
     }
 }

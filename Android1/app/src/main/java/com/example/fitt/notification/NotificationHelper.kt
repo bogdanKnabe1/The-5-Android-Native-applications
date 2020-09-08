@@ -14,9 +14,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.fitt.MainActivity
 import com.example.fitt.R
-import com.example.fitt.fragments.KEY_ID
-import com.example.fitt.repository.ReminderData
-import com.example.fitt.repository.WorkoutType
+import com.example.fitt.database.entity.ReminderData
+import com.example.fitt.utils.KEY_ID
+import com.example.fitt.utils.WorkoutType
 
 //Special object for manage creation of notification channel and data for notification
 object NotificationHelper {

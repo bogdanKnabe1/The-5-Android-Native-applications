@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fitt.repository.ReminderLocalRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
 
             // Delete the existing data
-            ReminderLocalRepository(this@MainActivity).deleteAll()
+            //ReminderLocalRepository(this@MainActivity).deleteAll()
             return true
         }
         return super.onOptionsItemSelected(item)

@@ -1,4 +1,4 @@
-package com.example.fitt.repository
+package com.example.fitt.utils
 
 enum class WorkoutType {
     Swimming,
