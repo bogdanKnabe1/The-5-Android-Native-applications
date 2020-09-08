@@ -7,17 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.fitt.FittApp
 import com.example.fitt.R
+import com.example.fitt.database.WorkoutDatabase
 import com.example.fitt.database.entity.ReminderData
 import com.example.fitt.notification.AlarmScheduler
-import com.example.fitt.repository.ReminderLocalRepository
+import com.example.fitt.repository.ReminderRepository
 import com.example.fitt.utils.WorkoutType
+import com.example.fitt.viewmodel.ReminderViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_second.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,13 +30,26 @@ import java.util.*
 class SecondFragment : Fragment() {
 
     private var reminderData = ReminderData()
+    private lateinit var reminderViewModel: ReminderViewModel
+    private val repository: ReminderRepository
+
+    init {
+        val userDao = WorkoutDatabase.getDatabase(
+                FittApp.applicationContext()
+        ).reminderDataDao()
+        repository = ReminderRepository(userDao)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        val view = inflater.inflate(R.layout.fragment_second, container, false)
+
+        reminderViewModel = ViewModelProvider(this).get(ReminderViewModel::class.java)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,25 +101,28 @@ class SecondFragment : Fragment() {
                     }
                 }
 
-                //Coroutine for save in database using createReminder
-                lifecycleScope.launch {
                 //create reminder and save to database
-                val id = createReminder(
-                        name = name,
-                        dateType = dateType,
-                        days = daysItems.filter { !it.isNullOrEmpty() }.toList()
-                )
-                    val reminder = ReminderLocalRepository(activity?.applicationContext).getReminderById(id)
+                //create object pf reminder
 
-                    AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder!!)
-                }
+                val id = createReminder(name = name, dateType = dateType, days = daysItems.filter { !it.isNullOrEmpty() }.toList())
+                val reminder = repository.getReminderById(id)
 
-                Snackbar.make(
-                        view,
-                        "Напоминание о тренировке создано!",
-                        Snackbar.LENGTH_LONG
-                ).show()
+                //save to database
+                reminderViewModel.insertReminder(reminder)
+                Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+
+                // Navigate Back
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
+                AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder)
             }
+
+
+            Snackbar.make(
+                    view,
+                    "Напоминание о тренировке создано!",
+                    Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -188,12 +209,15 @@ class SecondFragment : Fragment() {
     }
 
     //create obj Reminder
-    suspend fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
+    fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
         reminderData.name = name
         reminderData.type = dateType
         reminderData.days = days
 
-        return ReminderLocalRepository(activity?.applicationContext).saveReminder(reminderData)
+        fun idReturn(): Long = runBlocking {
+            repository.insertReminderRepository(reminderData)
+        }
+        return idReturn()
     }
 
     //function to build all checkboxes
@@ -206,4 +230,5 @@ class SecondFragment : Fragment() {
             linearLayoutDates.addView(checkBox)
         }
     }
+
 }

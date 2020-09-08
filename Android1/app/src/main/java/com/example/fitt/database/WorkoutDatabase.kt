@@ -21,4 +21,29 @@ abstract class WorkoutDatabase : RoomDatabase() {
 
     abstract fun reminderDataDao(): ReminderDao
 
+    companion object {
+        @Volatile
+        private var INSTANCE: WorkoutDatabase? = null
+
+        fun getDatabase(context: Context): WorkoutDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        WorkoutDatabase::class.java,
+                        "database"
+                )
+                        //Method .allowMainThreadQueries () - allows accessing the database in the main thread
+                        .allowMainThreadQueries()
+                        //DESTRUCT MIGRATION
+                        .fallbackToDestructiveMigration()
+                        .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
 }

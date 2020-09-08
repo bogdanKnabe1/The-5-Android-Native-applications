@@ -55,6 +55,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //GSON
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 
     // Room components
     def room_version = "2.2.5"

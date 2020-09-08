@@ -1,31 +1,32 @@
 package com.example.fitt
 
 import android.app.Application
+import android.content.Context
 import androidx.core.app.NotificationManagerCompat
-import androidx.room.Room
-import com.example.fitt.database.WorkoutDatabase
 import com.example.fitt.notification.NotificationHelper
 import com.example.fitt.utils.WorkoutType
 
 //SINGLETON
 class FittApp : Application() {
 
-    lateinit var app: FittApp
-    private lateinit var database: WorkoutDatabase
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: FittApp? = null
+
+        fun applicationContext() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     //Runs only one time at first startup of application
     override fun onCreate() {
         super.onCreate()
-        app = this
-        database = Room.databaseBuilder(this, WorkoutDatabase::class.java, "database")
-
-        /*Method .allowMainThreadQueries () - allows accessing the database in the main thread,
-        in a real application this should be avoided - since read operations from the database can be long and you will get ANR
-        Change on COROUTINE */
-                .allowMainThreadQueries()
-                //DESTRUCT MIGRATION
-                .fallbackToDestructiveMigration()
-                .build()
+        // Use ApplicationContext.
+        // example: SharedPreferences etc...
+        val context: Context = applicationContext()
 
         /* Please note that when creating a notification channel,
         you must specify the so-called level of importance of the channel.
@@ -55,11 +56,4 @@ class FittApp : Application() {
         )
     }
 
-    fun getInstance(): FittApp {
-        return app
-    }
-
-   fun getDatabase(): WorkoutDatabase {
-        return database
-    }
 }
