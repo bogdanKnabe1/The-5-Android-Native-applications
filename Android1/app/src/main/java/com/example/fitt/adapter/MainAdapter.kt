@@ -7,10 +7,13 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
 import com.example.fitt.database.entity.ReminderData
+import com.example.fitt.fragments.FirstFragmentDirections
 import com.example.fitt.utils.WorkoutType
+import kotlinx.android.synthetic.main.layout_reminder_row.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,10 +31,10 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         //getting data from list, i = position
-        val reminderData = reminderDataList[i]
+        val reminderData = reminderDataList[position]
         //set name
         viewHolder.textViewName.text = reminderData.name
         //get data
@@ -64,6 +67,12 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         }
         //set drawable
         viewHolder.imageViewIcon.setImageDrawable(drawable)
+
+        //direction from row in recycler with data of this row INTO update fragment.
+        viewHolder.itemView.rowReminderLayout.setOnClickListener {
+            val action = FirstFragmentDirections.actionFirstFragmentToThirdFragment(reminderData)
+            viewHolder.itemView.findNavController().navigate(action)
+        }
 
     }
 
