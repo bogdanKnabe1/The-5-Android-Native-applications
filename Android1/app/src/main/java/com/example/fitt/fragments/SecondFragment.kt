@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,6 +18,9 @@ import com.example.fitt.database.entity.ReminderData
 import com.example.fitt.notification.AlarmScheduler
 import com.example.fitt.repository.ReminderRepository
 import com.example.fitt.utils.WorkoutType
+import com.example.fitt.utils.buildCheckBoxes
+import com.example.fitt.utils.setupDaysCheckBoxes
+import com.example.fitt.utils.setupTypeRadioGroup
 import com.example.fitt.viewmodel.ReminderViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_second.*
@@ -57,7 +59,7 @@ class SecondFragment : Fragment() {
 
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.title = view.context.getString(R.string.fragment_title)
-        buildCheckBoxes(linearLayoutDates)
+        linearLayoutDates.buildCheckBoxes(linearLayoutDates)
         buttonTime.setOnClickListener {
             timeTapped()
         }
@@ -150,9 +152,11 @@ class SecondFragment : Fragment() {
 
     fun displayExistingReminder(reminderData: ReminderData) {
         textInputWorkout!!.setText(reminderData.name)
-        setupTypeRadioGroup(reminderData)
+        //check type of the current Training extension
+        //radioGroupType.setupTypeRadioGroup(radioGroupType)
+        setupTypeRadioGroup(reminderData, swimming, cycling, running)
         setTimeButtonText(reminderData.hour, reminderData.minute)
-        setupDaysCheckBoxes(reminderData)
+        linearLayoutDates.setupDaysCheckBoxes(reminderData, linearLayoutDates)
     }
 
     //Time picker dialog
@@ -176,38 +180,6 @@ class SecondFragment : Fragment() {
         reminderData.minute = minute
     }
 
-    //check type of the current Training
-    private fun setupTypeRadioGroup(reminderData: ReminderData) {
-        when {
-            reminderData.type === WorkoutType.Swimming -> {
-                swimming!!.isChecked = true
-            }
-            reminderData.type === WorkoutType.Cycling -> {
-                cycling!!.isChecked = true
-            }
-            else -> {
-                running!!.isChecked = true
-            }
-        }
-    }
-
-    private fun setupDaysCheckBoxes(reminderData: ReminderData) {
-        for (i in 0 until linearLayoutDates!!.childCount) {
-            if (linearLayoutDates!!.getChildAt(i) is CheckBox) {
-                val checkBox = linearLayoutDates!!.getChildAt(i) as CheckBox
-                for (j in reminderData.days!!.indices) {
-                    if (checkBox.text.toString().equals(
-                                    reminderData.days!![j],
-                                    ignoreCase = true
-                            )
-                    ) {
-                        checkBox.isChecked = true
-                    }
-                }
-            }
-        }
-    }
-
     //create obj Reminder
     fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
         reminderData.name = name
@@ -220,15 +192,5 @@ class SecondFragment : Fragment() {
         return idReturn()
     }
 
-    //function to build all checkboxes
-    private fun buildCheckBoxes(linearLayoutDates: LinearLayout) {
-        linearLayoutDates.removeAllViews()
-        val days = resources.getStringArray(R.array.days)
-        for (day in days) {
-            val checkBox = CheckBox(context)
-            checkBox.text = day
-            linearLayoutDates.addView(checkBox)
-        }
-    }
 
 }

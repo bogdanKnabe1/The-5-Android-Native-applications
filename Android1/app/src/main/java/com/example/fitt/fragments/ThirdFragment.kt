@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.fitt.R
+import com.example.fitt.utils.buildCheckBoxes
 import com.example.fitt.utils.hoursAndMinSum
+import com.example.fitt.utils.setupDaysCheckBoxes
+import com.example.fitt.utils.setupTypeRadioGroup
 import com.example.fitt.viewmodel.ReminderViewModel
 import kotlinx.android.synthetic.main.fragment_third.view.*
 
@@ -24,16 +27,20 @@ class ThirdFragment : Fragment() {
         //fun to sum time data
         val buttonTimeValue = hoursAndMinSum(args.currentReminder.hour, args.currentReminder.minute)
 
-        if (view.radioGroupTypeUpdate.checkedRadioButtonId == -1) {
-            // no radio buttons are checked
-        } else {
-            // one of the radio buttons is checked
-            args.currentReminder.type
-        }
+        //More clear way try to set radio button
+        //val radioGroupUpdate = view.findViewById<RadioGroup>(R.id.radioGroupTypeUpdate)
+        //radioGroupUpdate.setupTypeRadioGroup(radioGroupUpdate)
 
+        //dirty way
+        setupTypeRadioGroup(args.currentReminder, view.swimmingUpdate, view.cyclingUpdate, view.runningUpdate)
+        //set name of reminder
         view.textInputWorkoutUpdate.setText(args.currentReminder.name)
         view.buttonTimeUpdate.text = buttonTimeValue
-       // view.linearLayoutDatesUpdate.
+
+        view.linearLayoutDatesUpdate.buildCheckBoxes(view.linearLayoutDatesUpdate)
+        view.linearLayoutDatesUpdate.setupDaysCheckBoxes(args.currentReminder, view.linearLayoutDatesUpdate)
+
+
         return view
     }
 
