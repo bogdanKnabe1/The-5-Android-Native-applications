@@ -10,6 +10,7 @@
   | 02  | [Music app](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Musio) | X |
   | 03  | [News app](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Newarc) | X |
   | 04  | [Taxi helper](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Pureable/app) | X |
+  | 05  | [Reminder](https://github.com/NinpoU-u/The-5-Android-Native-applications/tree/master/Android1) | DONE |
   
 
   ## Music app
@@ -82,7 +83,25 @@
   
   ## Android1 (Named Fitt)
   
-  Fitt - simple fitness calendar this is just an application written in Kotlin as a training project.
+  Fitt - simple fitness calendar this is just an application written in Kotlin as a training project. 
+  In this project, i tried to figure out how to properly use the architectural components of the android design pattern (MVVM). Create some convenient sample for future applications with these new technologies.
+  
+  Here are used:
+  - ViewModel
+  - LiveData
+  - Room
+  - RecyclerView
+  - Lifecycle components
+  - Navigation
+  - Kotlin
+  - Kotlin coroutines
+  And i was prefer to use android sdk solution such as the:
+  - BroadcastReceiver
+  - AlarmManager
+  - NotificationManager
+  - Fragments
+  
+  The application will be further developed and will receive a number of updates related to performance improvements, animations and more functionality.
   
   ## Connection
 
@@ -90,6 +109,7 @@
 
   - Telegram at <a href="https://t.me/NinpoU_u" target="_blank">`My telegramm`</a>
   - Twitter at <a href="https://twitter.com/Bogdan21724971" target="_blank">`@NinpoU_u`</a>
+  - Gmail at <a>`bogdan.knabe1@gmail.com`</a>
   ---
 
   ## License
