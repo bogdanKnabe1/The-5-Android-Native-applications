@@ -66,65 +66,73 @@ class SecondFragment : Fragment() {
 
         //check all fields and save all reminds into database (ROOM)
         fabSaveReminder.setOnClickListener {
-            if (reminderData.hour == 0 && reminderData.minute == 0) {
+            insertReminder()
+        }
+    }
+
+    private fun insertReminder() {
+        if (reminderData.hour == 0 && reminderData.minute == 0) {
+            view?.let {
                 Snackbar.make(
-                        view,
+                        it,
                         "Вы не выбрали время",
                         Snackbar.LENGTH_LONG
                 ).show()
-            } else {
-                // Gather all the fields
-                val name = textInputWorkout!!.text!!.toString()
-                val checkedId = radioGroupType!!.checkedRadioButtonId
-                val dateType: WorkoutType
+            }
+        } else {
+            // Gather all the fields
+            val name = textInputWorkout!!.text!!.toString()
+            val checkedId = radioGroupType!!.checkedRadioButtonId
+            val dateType: WorkoutType
 
-                //check type of current training
-                dateType = when (checkedId) {
-                    R.id.swimming -> {
-                        WorkoutType.Swimming
-                    }
-                    R.id.cycling -> {
-                        WorkoutType.Cycling
-                    }
-                    else -> {
-                        WorkoutType.Running
+            //check type of current training
+            dateType = when (checkedId) {
+                R.id.swimming -> {
+                    WorkoutType.Swimming
+                }
+                R.id.cycling -> {
+                    WorkoutType.Cycling
+                }
+                else -> {
+                    WorkoutType.Running
+                }
+            }
+            //data structure for selected days in week
+            val daysItems = resources.getStringArray(R.array.days).toMutableList()
+
+            //check selected checkbox of dates
+            for (i in 0 until linearLayoutDates!!.childCount) {
+                if (linearLayoutDates!!.getChildAt(i) is CheckBox) {
+                    val checkBox = linearLayoutDates!!.getChildAt(i) as CheckBox
+                    if (!checkBox.isChecked) {
+                        daysItems[i] = null
                     }
                 }
-                //data structure for selected days in week
-                val daysItems = resources.getStringArray(R.array.days).toMutableList()
-
-                //check selected checkbox of dates
-                for (i in 0 until linearLayoutDates!!.childCount) {
-                    if (linearLayoutDates!!.getChildAt(i) is CheckBox) {
-                        val checkBox = linearLayoutDates!!.getChildAt(i) as CheckBox
-                        if (!checkBox.isChecked) {
-                            daysItems[i] = null
-                        }
-                    }
-                }
-
-                //create reminder and save to database
-                //create object pf reminder
-
-                val id = createReminder(name = name, dateType = dateType, days = daysItems.filter { !it.isNullOrEmpty() }.toList())
-                val reminder = repository.getReminderById(id)
-
-                //save to database
-                reminderViewModel.insertReminder(reminder)
-                Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
-
-                // Navigate Back
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-
-                AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder)
             }
 
+            //create reminder and save to database
+            //create object pf reminder
 
+            val id = createReminder(name = name, dateType = dateType, days = daysItems.filter { !it.isNullOrEmpty() }.toList())
+            val reminder = repository.getReminderById(id)
+
+            //save to database
+            reminderViewModel.insertReminder(reminder)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+
+            // Navigate Back
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
+            AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder)
+        }
+
+
+        view?.let {
             Snackbar.make(
-                    view,
-                    "Напоминание о тренировке создано!",
-                    Snackbar.LENGTH_LONG
-            ).show()
+                    it,
+                "Напоминание о тренировке создано!",
+                Snackbar.LENGTH_LONG
+        ).show()
         }
     }
 

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitt.R
 import com.example.fitt.adapter.MainAdapter
 import com.example.fitt.viewmodel.ReminderViewModel
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_first.view.*
 
 class FirstFragment : Fragment() {
@@ -78,7 +77,7 @@ class FirstFragment : Fragment() {
     private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            reminderViewModel.deleteAllUsers()
+            reminderViewModel.deleteAllReminders()
             Toast.makeText(
                     requireContext(),
                     "Successfully removed everything",
