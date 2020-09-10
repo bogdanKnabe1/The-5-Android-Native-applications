@@ -3,7 +3,6 @@ package com.example.fitt.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -86,7 +85,6 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         var textViewName: TextView = itemView.findViewById(R.id.textViewName)
         var textViewTimeToAdminister: TextView = itemView.findViewById(R.id.textViewTimeToAdminister)
         var textViewDays: TextView = itemView.findViewById(R.id.textViewDays)
-        var checkBoxAdministered: CheckBox = itemView.findViewById(R.id.checkBoxAdministered)
     }
 
     fun setData(reminderData: List<ReminderData>) {

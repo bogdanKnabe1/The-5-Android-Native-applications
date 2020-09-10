@@ -62,14 +62,6 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             tools:text="Понедельник · Среда · Пятница" />
 
-        <CheckBox
-            android:id="@+id/checkBoxAdministered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="8dp"
-            android:background="@null" />
-
     </RelativeLayout>
 
 </RelativeLayout>
