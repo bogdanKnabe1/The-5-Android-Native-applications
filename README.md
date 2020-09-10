@@ -95,7 +95,8 @@
   - Navigation
   - Kotlin
   - Kotlin coroutines
-  And i was prefer to use android sdk solution such as the:
+ 
+ And i was prefer to use android sdk solution such as the:
   - BroadcastReceiver
   - AlarmManager
   - NotificationManager
