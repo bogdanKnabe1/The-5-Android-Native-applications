@@ -5,6 +5,7 @@
     android:id="@+id/rowReminderLayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:foreground="?android:attr/selectableItemBackground"
     android:minHeight="72dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp">

@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitt.R
 import com.example.fitt.database.entity.ReminderData
@@ -69,8 +71,19 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
         //direction from row in recycler with data of this row INTO update fragment.
         viewHolder.itemView.rowReminderLayout.setOnClickListener {
+            //start transition
+            /*exitTransition = MaterialElevationScale(false).apply {
+                duration = viewHolder.itemView.context.resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = viewHolder.itemView.context.resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+*/
+            ViewCompat.setTransitionName(viewHolder.itemView.rowReminderLayout, "${reminderData.id}")
+            val reminderCardDetailTransitionName: String = viewHolder.itemView.context.getString(R.string.reminder_card_detail_transition_name)
+            val extras = FragmentNavigatorExtras(viewHolder.itemView.rowReminderLayout to reminderCardDetailTransitionName)
             val action = FirstFragmentDirections.actionFirstFragmentToThirdFragment(reminderData)
-            viewHolder.itemView.findNavController().navigate(action)
+            viewHolder.itemView.findNavController().navigate(action, extras)
         }
 
     }

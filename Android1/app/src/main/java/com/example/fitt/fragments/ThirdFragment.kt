@@ -1,10 +1,13 @@
 package com.example.fitt.fragments
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +19,7 @@ import com.example.fitt.repository.ReminderRepository
 import com.example.fitt.utils.*
 import com.example.fitt.viewmodel.ReminderViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_third.*
 import kotlinx.android.synthetic.main.fragment_third.view.*
 import kotlinx.coroutines.runBlocking
@@ -61,6 +65,18 @@ class ThirdFragment : Fragment() {
 
         view.fabSaveReminderUpdate.setOnClickListener {
             updateItem()
+        }
+
+        val rootLayoutRootView = view.findViewById<CoordinatorLayout>(R.id.thirdFragmentId)
+        ViewCompat.setTransitionName(rootLayoutRootView, "${args.currentReminder.id}")
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            // Scope the transition to a view in the hierarchy so we know it will be added under
+            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
+            drawingViewId = R.id.nav_host_fragment
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().themeColor(R.attr.colorSurface))
         }
 
         return view

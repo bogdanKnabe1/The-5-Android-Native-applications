@@ -4,8 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -43,7 +43,7 @@ class FirstFragment : Fragment() {
 
         // UserViewModel
         reminderViewModel = ViewModelProvider(this).get(ReminderViewModel::class.java)
-        reminderViewModel.readAllData.observe(viewLifecycleOwner, Observer { user ->
+        reminderViewModel.readAllData.observe(viewLifecycleOwner, { user ->
             adapter.setData(user)
         })
 
@@ -51,6 +51,9 @@ class FirstFragment : Fragment() {
         view.fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
 
         setHasOptionsMenu(true)
         return view

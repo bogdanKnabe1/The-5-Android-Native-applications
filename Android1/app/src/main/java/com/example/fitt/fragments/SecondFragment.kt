@@ -171,7 +171,7 @@ class SecondFragment : Fragment() {
     private fun displayTimeDialog(hour: Int, minute: Int) {
         val timePickerDialog = TimePickerDialog(
                 context,
-                { view, hourOfDay, minute ->
+                { _, hourOfDay, minute ->
                     setHourAndMinute(hourOfDay, minute)
                     setTimeButtonText(hourOfDay, minute)
                 },

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/secondFragmentId">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -27,7 +29,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/type_of_training_ru"
-                android:textSize="12sp"
+                android:textSize="16sp"
+                android:fontFamily="@font/work_sans_bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +50,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/work_sans"
                     android:text="@string/swimming" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
@@ -54,6 +58,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/work_sans"
                     android:text="@string/cycling" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
@@ -62,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
+                    android:fontFamily="@font/work_sans"
                     android:text="@string/running" />
             </RadioGroup>
 
@@ -80,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/name_hint"
                     android:inputType="textCapWords"
+                    android:fontFamily="@font/work_sans"
                     android:maxLength="40"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -91,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/time_ru"
-                android:textSize="12sp"
+                android:textSize="16sp"
+                android:fontFamily="@font/work_sans_bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/workoutName" />
@@ -102,10 +110,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:textSize="22sp"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:padding="16dp"
+                android:fontFamily="@font/work_sans"
                 android:text="@string/choose_time_ru"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -117,7 +127,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/days_text"
-                android:textSize="12sp"
+                android:textSize="16sp"
+                android:fontFamily="@font/work_sans_bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonTime" />

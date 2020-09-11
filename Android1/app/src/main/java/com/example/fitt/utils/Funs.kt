@@ -1,8 +1,14 @@
 package com.example.fitt.utils
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.core.content.res.use
 import com.example.fitt.R
 import com.example.fitt.database.entity.ReminderData
 import java.text.SimpleDateFormat
@@ -64,5 +70,17 @@ fun LinearLayout.buildCheckBoxes(linearLayoutDatesReceiving: LinearLayout) {
         val checkBox = CheckBox(context)
         checkBox.text = day
         linearLayoutDatesReceiving.addView(checkBox)
+    }
+}
+//color theme
+@ColorInt
+@SuppressLint("Recycle")
+fun Context.themeColor(
+        @AttrRes themeAttrId: Int
+): Int {
+    return obtainStyledAttributes(
+            intArrayOf(themeAttrId)
+    ).use {
+        it.getColor(0, Color.MAGENTA)
     }
 }
