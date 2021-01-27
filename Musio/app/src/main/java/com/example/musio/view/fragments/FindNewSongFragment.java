@@ -46,17 +46,11 @@ import static com.android.volley.VolleyLog.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FindNewSongFragment extends Fragment  {
+public class FindNewSongFragment extends Fragment {
 
     private RecyclerView recyclerViewArtist;
-    private RecyclerView recyclerViewAlbum;
     private RecyclerView recyclerViewTrack;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.LayoutManager layoutManagerAlbum;
-    private RecyclerView.LayoutManager layoutManagerTrack;
     private ProgressBar progressBar;
-    private Toolbar toolbarSearch;
-    private LinearLayout linearLayout;
     private ConstraintLayout constraintLayoutRecyclerArtist;
     private ConstraintLayout constraintLayoutRecyclerAlbum;
     private ConstraintLayout constraintLayoutRecyclerTrack;
@@ -81,12 +75,12 @@ public class FindNewSongFragment extends Fragment  {
         View v = inflater.inflate(R.layout.fragment_find_new_song, container, false); // Inflate the layout for this fragment
 
         //Setup toolbar for fragment and example for future
-        toolbarSearch = v.findViewById(R.id.toolbar2);
-        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarSearch);
+        Toolbar toolbarSearch = v.findViewById(R.id.toolbar2);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbarSearch);
         toolbarSearch.setTitleTextAppearance(requireActivity(), R.style.NunitoExtraBold);
 
         //Find include's
-        linearLayout = v.findViewById(R.id.support_layout);
+        LinearLayout linearLayout = v.findViewById(R.id.support_layout);
         constraintLayoutRecyclerArtist = linearLayout.findViewById(R.id.main_search_recycler);
         constraintLayoutRecyclerAlbum = linearLayout.findViewById(R.id.album_search_recycler);
         constraintLayoutRecyclerTrack = linearLayout.findViewById(R.id.track_search_recycler);
@@ -97,7 +91,7 @@ public class FindNewSongFragment extends Fragment  {
         recyclerViewArtist.setHasFixedSize(true);
 
         //Find recyclerView for album
-        recyclerViewAlbum = v.findViewById(R.id.album_recycler_view);
+        RecyclerView recyclerViewAlbum = v.findViewById(R.id.album_recycler_view);
         recyclerViewAlbum.setHasFixedSize(true);
 
         //Find recyclerView for track
@@ -105,15 +99,15 @@ public class FindNewSongFragment extends Fragment  {
         recyclerViewTrack.setHasFixedSize(true);
 
         // use a linear layout manager for Artist recycler
-        layoutManager = new LinearLayoutManager(requireActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity());
         recyclerViewArtist.setLayoutManager(layoutManager);
 
         // use a linear layout manager for Album recycler
-        layoutManagerAlbum = new LinearLayoutManager(requireActivity());
+        RecyclerView.LayoutManager layoutManagerAlbum = new LinearLayoutManager(requireActivity());
         recyclerViewAlbum.setLayoutManager(layoutManagerAlbum);
 
         // use a linear layout manager for Track recycler
-        layoutManagerTrack = new LinearLayoutManager(requireActivity());
+        RecyclerView.LayoutManager layoutManagerTrack = new LinearLayoutManager(requireActivity());
         recyclerViewTrack.setLayoutManager(layoutManagerTrack);
 
         progressBar = v.findViewById(R.id.progress_circular);
@@ -173,7 +167,7 @@ public class FindNewSongFragment extends Fragment  {
 
 
     //Method for call for album
-    private void searchAlbum(String artist){
+    private void searchAlbum(String artist) {
         Response.Listener<DataSearchAlbum> rep = response -> {
             Log.d(TAG, "searchAlbum Found " + response.getTotal() + " album");
             AlbumAdapter mAdapter = new AlbumAdapter(response.getData());
@@ -199,7 +193,7 @@ public class FindNewSongFragment extends Fragment  {
     }
 
     //Method for call for track
-    private void searchTrack(int album){
+    private void searchTrack(int album) {
         /*
         Create list tracks
         */
@@ -220,7 +214,7 @@ public class FindNewSongFragment extends Fragment  {
     }
 
     //private method for call Music player
-    private void goToMusicPlayer(Track track, Album album){
+    private void goToMusicPlayer(Track track, Album album) {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("key", track);

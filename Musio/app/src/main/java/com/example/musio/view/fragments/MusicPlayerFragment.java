@@ -2,7 +2,6 @@ package com.example.musio.view.fragments;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -26,12 +25,7 @@ import com.example.musio.models.deezerData.Track;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Objects;
 
 /**
@@ -44,16 +38,8 @@ public class MusicPlayerFragment extends Fragment {
     private ConstraintLayout constraintLayout;
     private ImageView playBtn;
     private ImageView pauseBtn;
-    private ImageView roundedImagePreview;
-    private TextView musicNameText;
-    private TextView artistNameText;
     private SeekBar seekBar;
     private TextView currentTime;
-    private TextView durationEnd;
-    private Track track;
-    private Album album;
-    private MediaPlayer player;
-
 
     public MusicPlayerFragment() {
         // Required empty public constructor
@@ -67,10 +53,10 @@ public class MusicPlayerFragment extends Fragment {
 
         playBtn = v.findViewById(R.id.play_btn);
         pauseBtn = v.findViewById(R.id.pause_btn);
-        roundedImagePreview = v.findViewById(R.id.roundRectCornerImageView);
-        musicNameText = v.findViewById(R.id.music_name);
-        artistNameText = v.findViewById(R.id.artist_name);
-        durationEnd = v.findViewById(R.id.duration_End);
+        ImageView roundedImagePreview = v.findViewById(R.id.roundRectCornerImageView);
+        TextView musicNameText = v.findViewById(R.id.music_name);
+        TextView artistNameText = v.findViewById(R.id.artist_name);
+        TextView durationEnd = v.findViewById(R.id.duration_End);
         currentTime = v.findViewById(R.id.durationStart);
         seekBar = v.findViewById(R.id.seekbar);
 
@@ -81,8 +67,8 @@ public class MusicPlayerFragment extends Fragment {
 
         if(null != bundle) {
             //init
-            track = bundle.getParcelable("key");
-            album = bundle.getParcelable("keyAlbum");
+            Track track = bundle.getParcelable("key");
+            Album album = bundle.getParcelable("keyAlbum");
 
             try {
                 player.setDataSource(Objects.requireNonNull(track).getPreview());
@@ -116,7 +102,7 @@ public class MusicPlayerFragment extends Fragment {
                 };
 
                 new Thread(() -> {
-                    while (player != null) {
+                    while (true) {
                         try {
                             // Log.i("Thread ", "Thread Called");
                             // create new message to send to handler
@@ -124,6 +110,7 @@ public class MusicPlayerFragment extends Fragment {
                                 Message msg = new Message();
                                 msg.what = player.getCurrentPosition();
                                 handler.sendMessage(msg);
+                                //!! Check state
                                 Thread.sleep(100);
                             }
                         } catch (InterruptedException e) {
@@ -142,7 +129,7 @@ public class MusicPlayerFragment extends Fragment {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     // loaded bitmap is here (bitmap)
-                    backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
+                    backGroundView.setImageBitmap(fastBlur(bitmap, 0.4f, 21));
                 }
 
                 @Override
@@ -182,7 +169,7 @@ public class MusicPlayerFragment extends Fragment {
 
         //blur set static img
         Bitmap bitmap = ((BitmapDrawable)backGroundView.getDrawable()).getBitmap();
-        backGroundView.setImageBitmap(fastblur(bitmap, 0.4f, 21));
+        backGroundView.setImageBitmap(fastBlur(bitmap, 0.4f, 21));
 
         return v;
     }
@@ -235,7 +222,7 @@ public class MusicPlayerFragment extends Fragment {
     // * or reduced by one, depending on if they are on the right or
     // * on the left side of the stack.
 
-    private Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
+    private Bitmap fastBlur(Bitmap sentBitmap, float scale, int radius) {
 
         int width = Math.round(sentBitmap.getWidth() * scale);
         int height = Math.round(sentBitmap.getHeight() * scale);

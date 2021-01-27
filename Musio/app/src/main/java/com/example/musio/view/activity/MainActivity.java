@@ -31,15 +31,14 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
-    private HomeFragment homeFragment = new HomeFragment();
-    private AlbumFragment albumFragment = new AlbumFragment();
-    private MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
-    private FindNewSongFragment findNewSongFragment  = new FindNewSongFragment();
+    private final HomeFragment homeFragment = new HomeFragment();
+    private final AlbumFragment albumFragment = new AlbumFragment();
+    private final MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
+    private final FindNewSongFragment findNewSongFragment  = new FindNewSongFragment();
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //INIT
         //Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawerCore);
-        navigationView = findViewById(R.id.drawer_navigation_item);
+        NavigationView navigationView = findViewById(R.id.drawer_navigation_item);
 
         //toggle drawer (was overloaded constructor with toolbar previously)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -133,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Navigation drawer
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

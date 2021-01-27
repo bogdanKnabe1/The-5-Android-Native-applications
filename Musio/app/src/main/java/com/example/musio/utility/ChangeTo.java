@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ChangeTo {
 
@@ -27,7 +28,7 @@ public class ChangeTo {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long time = date.getTime();
+        long time = date != null ? date.getTime() : 0;
         if (time < 1000000000000L) {
             time *= 1000;
         }
@@ -55,7 +56,7 @@ public class ChangeTo {
         }
     }
 
-    public static String formatedNumber(String number){
+    public static String formattedNumber(String number){
         int a = Integer.parseInt(number);
         return NumberFormat.getNumberInstance(Locale.getDefault()).format(a);
     }
@@ -64,8 +65,8 @@ public class ChangeTo {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         SimpleDateFormat new_format = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
         try {
-            Date newdate = df.parse(date);
-            return new_format.format(newdate);
+            Date newDate = df.parse(date);
+            return new_format.format(Objects.requireNonNull(newDate));
         } catch (ParseException e) {
             e.printStackTrace();
             return e.getMessage();

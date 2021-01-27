@@ -48,7 +48,6 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class HomeFragment extends Fragment {
 
     private AdapterPlaylist adapter;
-    private AdapterHome adapterCharts;
     private LinearLayoutManager managerHorizontal;
     private LinearLayoutManager managerVertical;
     private List<PlaylistItems> videoList = new ArrayList<>();
@@ -57,10 +56,8 @@ public class HomeFragment extends Fragment {
     private boolean isScroll = false;
     private int currentItem, totalItem, scrollOutItem;
     private String nextPageToken = "";
-    private Toolbar toolbarHome;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private TextView menuBurgerButtonHome;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -77,10 +74,10 @@ public class HomeFragment extends Fragment {
         loading2 = v.findViewById(R.id.shimmer2);
         RecyclerView rv = v.findViewById(R.id.recycler_playlist);
         RecyclerView rvCharts = v.findViewById(R.id.recycler_charts);
-        menuBurgerButtonHome = v.findViewById(R.id.menu_burger_button_home);
+        TextView menuBurgerButtonHome = v.findViewById(R.id.menu_burger_button_home);
 
         //toolbar
-        toolbarHome = v.findViewById(R.id.toolbar_home_player);
+        Toolbar toolbarHome = v.findViewById(R.id.toolbar_home_player);
         ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarHome);
         //set title to false toolbar settings
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
@@ -91,7 +88,7 @@ public class HomeFragment extends Fragment {
 
         //set adapter's and managers
         adapter = new AdapterPlaylist(getContext(), videoList);
-        adapterCharts = new AdapterHome(getContext(), videoListCharts);
+        AdapterHome adapterCharts = new AdapterHome(getContext(), videoListCharts);
         managerHorizontal = new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false);
         managerVertical = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 

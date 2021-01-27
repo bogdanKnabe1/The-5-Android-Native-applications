@@ -30,7 +30,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.videoList = videoList;
     }
 
-    class YoutubeHolder extends RecyclerView.ViewHolder {
+    static class YoutubeHolder extends RecyclerView.ViewHolder {
 
         ImageView imageMusic;
         TextView musicName, musicTime;
@@ -47,14 +47,11 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             String getNameОfTrack = data.getSnippet().getPublishedAt();
             String getThumb  = data.getSnippet().getThumbnails().getMedium().getUrl();
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /*Intent i = new Intent(context, YTPlayerActivity.class);
-                    i.putExtra("video_id", data.getId().getVideoId());
-                    i.putExtra("video_title", getJudul);
-                    context.startActivity(i);*/
-                }
+            itemView.setOnClickListener(v -> {
+                /*Intent i = new Intent(context, YTPlayerActivity.class);
+                i.putExtra("video_id", data.getId().getVideoId());
+                i.putExtra("video_title", getJudul);
+                context.startActivity(i);*/
             });
 
             musicName.setText(getImage);

@@ -46,15 +46,12 @@ public class AlbumFragment extends Fragment {
 
 
     private AdapterHome adapter;
-    private LinearLayoutManager manager;
-    private List<VideoYT> videoList = new ArrayList<>();
+    private final List<VideoYT> videoList = new ArrayList<>();
     private ShimmerFrameLayout loading1,loading2;
     private boolean isScroll = false;
     private String nextPageToken = "";
-    private Toolbar toolbarMusicPlayer;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private TextView buttonBurgerMenu;
 
 
     public AlbumFragment() {
@@ -71,13 +68,13 @@ public class AlbumFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_albums, container, false);
 
         //init view's in fragment
-        buttonBurgerMenu = v.findViewById(R.id.menu_burger_button);
+        TextView buttonBurgerMenu = v.findViewById(R.id.menu_burger_button);
         loading1 = v.findViewById(R.id.shimmer1);
         loading2 = v.findViewById(R.id.shimmer2);
         RecyclerView rv = v.findViewById(R.id.musicRecyclerView);
 
         //toolbar
-        toolbarMusicPlayer = v.findViewById(R.id.toolbar_music_player);
+        Toolbar toolbarMusicPlayer = v.findViewById(R.id.toolbar_music_player);
         ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbarMusicPlayer);
         //set title to false toolbar settings
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
@@ -88,7 +85,7 @@ public class AlbumFragment extends Fragment {
 
         //set adapter + manager
         adapter = new AdapterHome(getContext(),videoList);
-        manager = new LinearLayoutManager(getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv.setAdapter(adapter);
         rv.setLayoutManager(manager);
 
