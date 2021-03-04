@@ -7,7 +7,7 @@
   |  #  |            Project             | STATUS |
   | :-: | :----------------------------: | :-------: |
   | 01  | [FlexPictures](https://github.com/NinpoU-u/The-4-Android-Native-applications/tree/master/FlexPictures/app) | X |
-  | 02  | [Music app](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Musio) | X |
+  | 02  | [Music app](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Musio) | alpha |
   | 03  | [News app](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Newarc) | X |
   | 04  | [Taxi helper](https://github.com/NinpoU-u/The-6-Android-Native-applications/tree/master/Pureable/app) | X |
   | 05  | [Reminder](https://github.com/NinpoU-u/The-5-Android-Native-applications/tree/master/Android1) | DONE |
