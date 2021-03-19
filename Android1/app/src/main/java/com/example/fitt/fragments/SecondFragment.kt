@@ -81,12 +81,12 @@ class SecondFragment : Fragment() {
             }
         } else {
             // Gather all the fields
-            val name = textInputWorkout!!.text!!.toString()
-            val checkedId = radioGroupType!!.checkedRadioButtonId
-            val dateType: WorkoutType
+                //CHECK FIELDS @@!!
+            val name = textInputWorkout.text.toString()
+            val checkedId = radioGroupType.checkedRadioButtonId
 
             //check type of current training
-            dateType = when (checkedId) {
+            val dateType: WorkoutType = when (checkedId) {
                 R.id.swimming -> {
                     WorkoutType.Swimming
                 }
@@ -126,23 +126,25 @@ class SecondFragment : Fragment() {
             AlarmScheduler.scheduleAlarmsForReminder(activity?.applicationContext!!, reminder)
         }
 
-
         view?.let {
             Snackbar.make(
                     it,
-                "Напоминание о тренировке создано!",
-                Snackbar.LENGTH_LONG
-        ).show()
+                    "Напоминание о тренировке создано!",
+                    Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 
-    //set text with current data to timeButton
-    private fun setTimeButtonText(hourOfDay: Int, minute: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        calendar.set(Calendar.MINUTE, minute)
-        val dateFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-        buttonTime?.text = dateFormat.format(calendar.time)
+    //create obj Reminder
+    private fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
+        reminderData.name = name
+        reminderData.type = dateType
+        reminderData.days = days
+
+        fun idReturn(): Long = runBlocking {
+            repository.insertReminderRepository(reminderData)
+        }
+        return idReturn()
     }
 
     //function which one is invoked when we click on Time selection
@@ -156,6 +158,15 @@ class SecondFragment : Fragment() {
             val minute = date.get(Calendar.MINUTE)
             displayTimeDialog(hour, minute)
         }
+    }
+
+    //set text with current data to timeButton
+    private fun setTimeButtonText(hourOfDay: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        calendar.set(Calendar.MINUTE, minute)
+        val dateFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+        buttonTime?.text = dateFormat.format(calendar.time)
     }
 
     fun displayExistingReminder(reminderData: ReminderData) {
@@ -187,18 +198,5 @@ class SecondFragment : Fragment() {
         reminderData.hour = hourOfDay
         reminderData.minute = minute
     }
-
-    //create obj Reminder
-    fun createReminder(name: String, dateType: WorkoutType, days: List<String?>?): Long {
-        reminderData.name = name
-        reminderData.type = dateType
-        reminderData.days = days
-
-        fun idReturn(): Long = runBlocking {
-            repository.insertReminderRepository(reminderData)
-        }
-        return idReturn()
-    }
-
 
 }

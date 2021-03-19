@@ -1,11 +1,9 @@
+/*
 package com.example.musio.network;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.example.musio.models.deezerData.DataSearchAlbum;
 import com.example.musio.models.deezerData.DataSearchArtist;
 import com.example.musio.models.deezerData.DataSearchTrack;
@@ -86,3 +84,4 @@ public class DeezerService {
 //        queue.add(gsonRequest);
 //    }
 }
+*/

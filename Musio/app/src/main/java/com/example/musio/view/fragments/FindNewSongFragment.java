@@ -1,5 +1,7 @@
 package com.example.musio.view.fragments;
 
+
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +15,13 @@ import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.example.musio.R;
 import com.example.musio.adapter.AlbumAdapter;
 import com.example.musio.adapter.ArtistAdapter;
@@ -33,21 +31,18 @@ import com.example.musio.models.deezerData.DataSearchAlbum;
 import com.example.musio.models.deezerData.DataSearchArtist;
 import com.example.musio.models.deezerData.DataSearchTrack;
 import com.example.musio.models.deezerData.Track;
-import com.example.musio.network.DeezerService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-import static com.android.volley.VolleyLog.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FindNewSongFragment extends Fragment {
 
+    private static final String TAG = "TAG DEBUG" ;
     private RecyclerView recyclerViewArtist;
     private RecyclerView recyclerViewTrack;
     private ProgressBar progressBar;
@@ -153,7 +148,7 @@ public class FindNewSongFragment extends Fragment {
                         constraintLayoutEmpty.setVisibility(View.GONE);
                     };
                     //Call for artist
-                    DeezerService.searchAuthor(requireActivity(), query, rep, error);
+                    // API CALL -> DeezerService.searchAuthor(requireActivity(), query, rep, error);
                 }
                 return false;
             }
@@ -189,7 +184,7 @@ public class FindNewSongFragment extends Fragment {
         };
 
         //Fragment communication, pass artist
-        DeezerService.searchAlbum(requireActivity(), artist, rep, error);
+        // API CALL -> DeezerService.searchAlbum(requireActivity(), artist, rep, error);
     }
 
     //Method for call for track
@@ -210,7 +205,7 @@ public class FindNewSongFragment extends Fragment {
         };
 
         //Fragment communication, pass artist
-        DeezerService.searchAlbumTrack(requireActivity(), album, rep, error);
+        // -> API CALL DeezerService.searchAlbumTrack(requireActivity(), album, rep, error);
     }
 
     //private method for call Music player
