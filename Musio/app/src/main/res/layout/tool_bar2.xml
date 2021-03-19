@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--TOOLBAR-->
+<?xml version="1.0" encoding="utf-8"?><!--TOOLBAR-->
 <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_home_player"
@@ -19,6 +18,8 @@
         android:layout_alignParentEnd="true"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/logo_toolbar_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo_toolbar_home"
         app:theme="@style/AppTheme.Toolbar">
     </androidx.appcompat.widget.Toolbar>

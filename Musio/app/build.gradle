@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 
@@ -25,9 +26,6 @@ android {
     allprojects {
         repositories {
             jcenter()
-            maven {
-                url 'https://maven.google.com'
-            }
         }
     }
 
@@ -77,19 +75,21 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version" // For Kotlin use navigation-fragment-ktx
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version" // For Kotlin use navigation-ui-ktx
 
-    // recycler
-    def recycler_view_version = "1.2.0-alpha01"
-    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
-
     //COIL - Image library
     implementation("io.coil-kt:coil:1.1.1")
 
     // ViewModel and LiveData
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
     //implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:2.3.0"
+
+    // Activity KTX for viewModels()
+    implementation "androidx.activity:activity-ktx:1.2.1"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -103,8 +103,30 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
     // Coroutines
-    def version_kotlin_coroutines = "1.4.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+
+    // Timber for logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore:22.1.1'
+
+    // Firebase Storage KTX
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.1'
+
+    // Firebase Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+
+    // ExoPlayer - for music stream
+    api "com.google.android.exoplayer:exoplayer-core:2.11.8"
+    api "com.google.android.exoplayer:exoplayer-ui:2.11.8"
+    api "com.google.android.exoplayer:extension-mediasession:2.11.8"
 }
