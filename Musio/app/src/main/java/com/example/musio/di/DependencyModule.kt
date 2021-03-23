@@ -7,8 +7,9 @@ import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
-// check DI
+// check DI ( now service locator pattern )
 object DependencyModule {
+
 
     fun provideAudioAttributes() = AudioAttributes.Builder()
             .setContentType(C.CONTENT_TYPE_MUSIC)
