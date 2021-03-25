@@ -6,6 +6,7 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.example.musio.di.DependencyModule
+import com.example.musio.exoplayer.callbacks.MusicPlayerNotificationListener
 import com.example.musio.other.Constants.SERVICE_TAG
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import kotlinx.coroutines.CoroutineScope
@@ -18,8 +19,11 @@ class MusicService : MediaBrowserServiceCompat() {
     private val serviceJob = Job()
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-    private lateinit var mediasSession: MediaSessionCompat
+    private lateinit var musicNotificationManager: MusicNotificationManager
+    private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
+
+    var isForegroundService = false
 
     override fun onCreate() {
         super.onCreate()
@@ -29,14 +33,22 @@ class MusicService : MediaBrowserServiceCompat() {
         }
 
         // token to get information about media session
-        mediasSession = MediaSessionCompat(this, SERVICE_TAG).apply {
+        mediaSession = MediaSessionCompat(this, SERVICE_TAG).apply {
             setSessionActivity(activityIntent)
             isActive = true
         }
 
-        sessionToken = mediasSession.sessionToken
+        sessionToken = mediaSession.sessionToken
 
-        mediaSessionConnector = MediaSessionConnector(mediasSession)
+        musicNotificationManager = MusicNotificationManager(
+                this,
+                mediaSession.sessionToken,
+                MusicPlayerNotificationListener(this)
+        ) {
+            // lyambda
+        }
+
+        mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(DependencyModule.provideExoPlayer(this, DependencyModule.provideAudioAttributes()))
     }
 

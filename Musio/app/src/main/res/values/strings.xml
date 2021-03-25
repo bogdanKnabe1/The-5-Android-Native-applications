@@ -1,21 +1,23 @@
 <resources>
     <string name="app_name">Musio</string>
+    <string name="notification_channel_name">Music Channel</string>
+    <string name="notification_channel_description">Shows currently playing music</string>
 
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="name_of_track"><![CDATA[Akcent feat Lidia Buble & DDY Nunes - Kamelia]]></string>
     <string name="playlist_name">Playlist name</string>
     <string name="numbers_of_video">Numbers of video</string>
     <string name="numbers">Numbers</string>
     <string name="playlists">Playlists</string>
-    <string name="tittle">Musio</string>
+    <string name="title">Musio</string>
     <string name="top_track">top track</string>
-    <string name="trandingForChange">// TRENDING</string>
+    <string name="tranding_for_change">// TRENDING</string>
     <string name="playButton">PLAY</string>
     <string name="top_Charts">Top Tracks</string>
     <string name="playlistCount">PlaylistCount</string>
-    <string name="template">Kamelia</string>
     <string name="search_title">Search</string>
+
+
 </resources>
