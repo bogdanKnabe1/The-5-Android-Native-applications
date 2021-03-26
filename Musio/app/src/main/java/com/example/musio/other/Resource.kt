@@ -1,5 +1,6 @@
 package com.example.musio.other
 
+// Generic class for handle states
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     // emit Resource's - in VIEW we can check status of resource
     companion object {

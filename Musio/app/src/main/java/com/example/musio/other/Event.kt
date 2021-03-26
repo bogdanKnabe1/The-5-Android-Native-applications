@@ -1,5 +1,6 @@
 package com.example.musio.other
 
+// Wrapper class for Resource class to get content ( data )
 open class Event<out T>(private val data: T) {
 
     // emit single time

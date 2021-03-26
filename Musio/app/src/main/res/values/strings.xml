@@ -19,5 +19,7 @@
     <string name="playlistCount">PlaylistCount</string>
     <string name="search_title">Search</string>
 
-
+    <string name="network_error">"Couldn't connect to the server. Please check your internet connection!"</string>
+    <string name="connection_suspended">Connection was suspended</string>
+    <string name="error_occurated">"Couldn't connect to media browser"</string>
 </resources>

@@ -13,6 +13,7 @@ import com.example.musio.exoplayer.callbacks.MusicPlaybackPreparer
 import com.example.musio.exoplayer.callbacks.MusicPlayerEventListener
 import com.example.musio.exoplayer.callbacks.MusicPlayerNotificationListener
 import com.example.musio.other.Constants.MEDIA_ROOT_ID
+import com.example.musio.other.Constants.NETWORK_ERROR
 import com.example.musio.other.Constants.SERVICE_TAG
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -137,6 +138,8 @@ class MusicService : MediaBrowserServiceCompat() {
                             isPlayerInitialized = true
                         }
                     } else {
+                        //send network error to MusicServiceConnection in MediaControllerCallback, where we can catch it and work with him
+                        mediaSession.sendSessionEvent(NETWORK_ERROR, null)
                         result.sendResult(null)
                     }
                 }
