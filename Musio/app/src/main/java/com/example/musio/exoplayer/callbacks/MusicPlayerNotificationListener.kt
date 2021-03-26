@@ -11,7 +11,7 @@ class MusicPlayerNotificationListener(
         private val musicService: MusicService
 ) : PlayerNotificationManager.NotificationListener {
 
-    // when user swipe away song in notification
+    // when user swipe away song in notification ( cancel )
     override fun onNotificationCancelled(notificationId: Int, dismissedByUser: Boolean) {
         super.onNotificationCancelled(notificationId, dismissedByUser)
         musicService.apply {
@@ -21,7 +21,7 @@ class MusicPlayerNotificationListener(
         }
     }
 
-    // opposite to cancel
+    // starting service in foreground
     override fun onNotificationPosted(notificationId: Int, notification: Notification, ongoing: Boolean) {
         super.onNotificationPosted(notificationId, notification, ongoing)
         musicService.apply {

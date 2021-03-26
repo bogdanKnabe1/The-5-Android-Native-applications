@@ -2,6 +2,7 @@ package com.example.musio.di
 
 import android.content.Context
 import com.example.musio.data.remote.MusicDatabase
+import com.example.musio.exoplayer.FirebaseMusicSource
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
@@ -13,6 +14,8 @@ import com.google.android.exoplayer2.util.Util
 object DependencyModule {
 
     fun provideMusicDatabase() = MusicDatabase()
+
+    fun provideFirebaseMusicSource() = FirebaseMusicSource(provideMusicDatabase())
 
     fun provideAudioAttributes() = AudioAttributes.Builder()
             .setContentType(C.CONTENT_TYPE_MUSIC)
