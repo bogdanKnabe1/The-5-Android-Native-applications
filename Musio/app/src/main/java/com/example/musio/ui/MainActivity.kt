@@ -1,4 +1,4 @@
-package com.example.musio.view
+package com.example.musio.ui
 
 import android.os.Bundle
 import android.util.Log

@@ -16,7 +16,7 @@
         android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".view.MainActivity">
+            android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
