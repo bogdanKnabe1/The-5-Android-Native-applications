@@ -70,7 +70,7 @@ class FirebaseMusicSource(private val musicDatabase: MusicDatabase) {
                 .setIconUri(song.description.iconUri)
                 .build()
         MediaBrowserCompat.MediaItem(descriptions, FLAG_PLAYABLE)
-    }
+    }.toMutableList()
 
     // listen in data source (music source) when music is finished downloading
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
