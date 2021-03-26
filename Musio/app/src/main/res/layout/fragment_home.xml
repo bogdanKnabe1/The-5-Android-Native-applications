@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/trandingForChange"
+                android:text="@string/tranding_for_change"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -175,38 +175,5 @@
 
         </LinearLayout>
 
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shimmer_auto_start="true"
-            app:shimmer_duration="2000">
-
-            <include layout="@layout/shimmer_video" />
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shimmer_auto_start="true"
-            app:shimmer_duration="2000">
-
-            <include layout="@layout/shimmer_video" />
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+s    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
