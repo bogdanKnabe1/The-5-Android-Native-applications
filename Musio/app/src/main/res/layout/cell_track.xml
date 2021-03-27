@@ -1,192 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="4dp"
-    android:layout_margin="5dp">
+    android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/image_item_songs"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <!--<ImageView
-                android:id="@+id/imageViewTrack"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@+id/textTrackDuration"
-                app:layout_constraintEnd_toStartOf="@+id/textTrackName"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4" />-->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:gravity="start|end"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_item_songs"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Playlist Title" />
 
-            <LinearLayout
-                android:id="@+id/layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/nunito_light"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_item_songs"
+        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        tools:text="100 Songs" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text_Artist_Name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="?android:selectableItemBackground"
-                    android:fontFamily="@font/nunito_regular"
-                    android:textColor="@android:color/black"
-                    android:textSize="22sp"
-                    tools:text="Track Name" />
-
-                    <TextView
-                        android:id="@+id/text_Track_Name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="?android:selectableItemBackground"
-                        android:fontFamily="@font/nunito_light"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="Track Name" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:gravity="end">
-
-
-                    <ImageButton
-                        android:id="@+id/playButton"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginTop="8dp"
-                        android:background="?attr/colorPrimary"
-                        android:contentDescription="Play Button"
-                        android:src="@android:drawable/ic_media_play"/>
-
-                    <TextView
-                        android:id="@+id/textTrackDuration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="?android:selectableItemBackground"
-                        android:fontFamily="@font/nunito_regular"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        tools:text="Track Duration"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--<TextView
-                android:id="@+id/text_Artist_Name"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:background="?android:selectableItemBackground"
-                android:fontFamily="@font/nunito_regular"
-                android:padding="20dp"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlCompat"
-                tools:text="Track Name" />
-
-            <TextView
-                android:id="@+id/text_Track_Name"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="?android:selectableItemBackground"
-                android:fontFamily="@font/nunito_light"
-                android:gravity="center"
-                android:padding="20dp"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/text_Artist_Name"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/text_Artist_Name"
-                app:layout_constraintTop_toBottomOf="@+id/text_Artist_Name"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="RtlCompat"
-                tools:text="Track Name" />
-
-            <TextView
-                android:id="@+id/textTrackDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="?android:selectableItemBackground"
-                android:fontFamily="@font/nunito_regular"
-                android:gravity="center"
-                android:padding="20dp"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAlignment="viewEnd"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playButton"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="Track Duration"
-                tools:ignore="RtlCompat" />
-
-            <ImageButton
-                android:id="@+id/playButton"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="start"
-                android:layout_marginEnd="16dp"
-                android:textAlignment="viewEnd"
-                android:background="?attr/colorPrimary"
-                android:contentDescription="Play Button"
-                android:src="@android:drawable/ic_media_play"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textTrackDuration"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.163"
-                tools:ignore="RtlCompat" />-->
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

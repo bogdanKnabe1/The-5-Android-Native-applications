@@ -38,6 +38,14 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    kapt {
+        correctErrorTypes true
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -72,28 +80,27 @@ dependencies {
 
     //lifecycle + ViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     //Navigation Components
-    def nav_version = "2.3.4"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version" // For Kotlin use navigation-fragment-ktx
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version" // For Kotlin use navigation-ui-ktx
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.4"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.4"
 
     //COIL - Image library
     implementation("io.coil-kt:coil:1.1.1")
 
     // ViewModel and LiveData
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     //implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion"
-    kapt "androidx.lifecycle:lifecycle-compiler:2.3.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.3.1"
 
     // Activity KTX for viewModels()
-    implementation "androidx.activity:activity-ktx:1.2.1"
+    implementation "androidx.activity:activity-ktx:1.2.2"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"

@@ -9,7 +9,7 @@
     android:background="?attr/selectableItemBackground">
 
     <!--Check when api work-->
-    <com.example.musio.utility.RoundRectCornerImageView
+    <ImageView
         android:id="@+id/iv_playlist_presentation"
         android:layout_width="220dp"
         android:layout_height="120dp"
