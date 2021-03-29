@@ -14,7 +14,7 @@
         android:adjustViewBounds="true"
         android:focusable="false"
         android:scaleType="centerCrop"
-        tools:src="@drawable/common_google_signin_btn_icon_dark"
+        tools:src="@tools:sample/backgrounds/scenic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_height="170dp"
         android:layout_marginTop="100dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/common_google_signin_btn_text_disabled"
+        tools:src="@tools:sample/backgrounds/scenic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
