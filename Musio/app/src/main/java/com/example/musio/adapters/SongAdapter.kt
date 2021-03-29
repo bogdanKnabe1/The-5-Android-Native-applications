@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.bumptech.glide.Glide
 import com.example.musio.R
 import com.example.musio.data.entity.Song
 import com.example.musio.databinding.CellTrackBinding

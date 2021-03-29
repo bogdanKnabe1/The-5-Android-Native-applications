@@ -36,6 +36,8 @@ class MusicNotificationManager(
                 notificationListener
         ).apply {
             setSmallIcon(R.drawable.ic_music)
+            // special token with our media session to show player in notification
+            // gives media controls such as play/pause/seek/skip
             setMediaSessionToken(sessionToken)
         }
     }
