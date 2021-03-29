@@ -1,5 +1,6 @@
 package com.example.musio.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musio.R
 import com.example.musio.adapters.SongAdapter
 import com.example.musio.databinding.FragmentHomeBinding
 import com.example.musio.di.DependencyModule
@@ -35,7 +37,7 @@ class HomeFragment : Fragment() {
         val view = homeBinding.root
 
         songAdapter = SongAdapter()
-
+        setStatusBarColorDark()
         return view
     }
 
@@ -49,7 +51,9 @@ class HomeFragment : Fragment() {
             mainViewModel.playOrToggleSong(it)
         }
     }
-
+    private fun setStatusBarColorDark() {
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
     private fun setUpRecyclerView() = homeBinding.rvAllSongs.apply {
         adapter = songAdapter
         layoutManager = LinearLayoutManager(requireContext())

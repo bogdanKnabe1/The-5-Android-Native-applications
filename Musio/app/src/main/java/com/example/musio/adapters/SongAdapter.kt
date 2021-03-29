@@ -1,8 +1,11 @@
 package com.example.musio.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +64,16 @@ class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
             with(binding) {
                 val songs = songs[position]
                 itemView.setOnClickListener {
+                    val navController: NavController?
+                    navController = Navigation.findNavController(itemView)
+                    val bundle = Bundle()
+                    with(bundle) {
+                        putString("title", songs.title)
+                        putString("subtitle", songs.subTitle)
+                        putString("image", songs.imageUrl)
+                        putInt("position", position)
+                    }
+                    navController.navigate(R.id.global_action_to_song_fragment, bundle)
                     onItemClickListener?.let { click ->
                         click(songs)
                     }
