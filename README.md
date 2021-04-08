@@ -15,38 +15,19 @@
 
   ## Music app
 
-  Musio is a simple music streaming service that implements many basic concepts for building an android application. Here are used:
-  - RecyclerView
-  - Picasso
-  - Retrofit(now Volley)
-  - BottomNavigationView
-  - CircleImageView
-  - Single activity pattern
-  - REST api
-  - and many other and many other small features like blurred background custom toolbar etc.
+  Musio is a simple music streaming service that implements many basic concepts for building an android application. Musio was rewrite on Kotlin with new technologies as im grow up as a developer :) Here are used:
+  - Kotlin
+  - Android Jetpack (ViewModel, Lifecycle, LiveData)
+  - Kotlin Coroutines
+  - Retrofit
+  - OkHttp
+  - MVVM architecture
   
-  Now we have:
-  - Implemented Search sond fragment and Music player fragment
-  - We can find any song and listn it
-  - We have simple music player and we can extend it with more fetures in future
-  - We have simple UI with more flexibility.
-  - A very clear UI construction scheme based on our architecture. We have one activity which contains a container in which the necessary fragments (screens) are replaced
-  - Implemented fragment communication with out ViewModel library.
-  - And many other small things can be finded in this project.
+  ![MusioMusicPlayer](https://user-images.githubusercontent.com/47458290/114009849-318ac500-986c-11eb-9fa8-90fc72c1ae81.png)
   
-  Would be implement in future:
-  - Network with Retrofit
-  - Naviation library from jetpack for more cleaner code related to fragments and user experience
-  - Implement Home screen and Albums screen
-  - User profile and registration
+  ![MusioPlayer](https://user-images.githubusercontent.com/47458290/114009920-4404fe80-986c-11eb-80df-443412a6f528.png)
   
-  Some pictures of Musio
-  
-  ![MusioMusicPlayer](https://user-images.githubusercontent.com/47458290/87451151-26ba4100-c608-11ea-9676-4d1626a463f6.png)
-  
-  ![MusioSearch](https://user-images.githubusercontent.com/47458290/87451158-291c9b00-c608-11ea-9258-583d2ada1cae.png)
-  
-  ![musioTrackList](https://user-images.githubusercontent.com/47458290/87451164-2ae65e80-c608-11ea-8d35-358a61f7d5ff.png)
+  ![MusioPlayerInStatusBar](https://user-images.githubusercontent.com/47458290/114010051-64cd5400-986c-11eb-93e1-9c73fbbb6136.png)
 
   ## FlexPicture app
   
