@@ -59,8 +59,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
 
     // Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
 
     //legacy
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

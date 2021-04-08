@@ -5,16 +5,10 @@
     android:orientation="vertical"
     android:id="@+id/support_layout">
 
-
     <include
         android:id="@+id/toolbarSearchLayout"
         layout="@layout/tool_bar_search"
         android:visibility="visible" />
-
-    <include
-        android:id="@+id/main_search_recycler"
-        layout="@layout/content_main"
-        android:visibility="gone"/>
 
     <include
         android:id="@+id/album_search_recycler"

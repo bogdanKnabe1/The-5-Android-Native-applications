@@ -34,10 +34,15 @@
     <!-- Global action -->
     <action
         android:id="@+id/global_action_to_song_fragment"
-        app:destination="@+id/songFragment"
+        app:destination="@id/songFragment"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
         app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"/>
+        app:exitAnim="@anim/slide_out_left">
+        <argument
+            android:name="util_bool"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </action>
 
 </navigation>

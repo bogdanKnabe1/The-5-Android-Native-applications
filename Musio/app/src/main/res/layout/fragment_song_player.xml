@@ -85,7 +85,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/durationStart"
+        android:id="@+id/current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0:00"
@@ -98,7 +98,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/duration_End"
+        android:id="@+id/song_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4:20"
@@ -133,27 +133,14 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/play_btn"
+            android:id="@+id/play_pause_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:src="@drawable/ic_play_circle">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/pause_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="visible"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_pause_circle">
         </ImageView>
 
 
