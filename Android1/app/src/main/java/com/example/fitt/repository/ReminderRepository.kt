@@ -17,10 +17,6 @@ class ReminderRepository(private val dao: ReminderDao) {
     suspend fun updateReminderRepository(reminderData: ReminderData) {
         dao.update(reminderData)
     }
-    /*//to get ALL data in list old list
-    fun getReminders(): MutableList<ReminderData> {
-        return dao.getReminderData()
-    }*/
 
     //to get data by ID
     fun getReminderById(id: Long): ReminderData {

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/musicViewgroup"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.MusicPlayerFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/imageViewBackground"
@@ -15,19 +14,19 @@
         android:adjustViewBounds="true"
         android:focusable="false"
         android:scaleType="centerCrop"
-        android:src="@drawable/gtr"
+        tools:src="@tools:sample/backgrounds/scenic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.musio.utility.RoundRectCornerImageView
+    <ImageView
         android:id="@+id/roundRectCornerImageView"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginTop="100dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/gtr"
+        tools:src="@tools:sample/backgrounds/scenic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +85,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/durationStart"
+        android:id="@+id/current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0:00"
@@ -99,7 +98,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/duration_End"
+        android:id="@+id/song_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4:20"
@@ -134,27 +133,14 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/play_btn"
+            android:id="@+id/play_pause_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:src="@drawable/ic_play_circle">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/pause_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="visible"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_pause_circle">
         </ImageView>
 
 

@@ -7,4 +7,7 @@
     <color name="colorIconBottomNav">#3E2AD1</color>
     <color name="colorHeader">#0F1E36</color>
     <color name="colorSubtitle">#800F1E36</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
+

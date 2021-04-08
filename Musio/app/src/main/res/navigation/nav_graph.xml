@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.musio.ui.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+    <fragment
+        android:id="@+id/songFragment"
+        android:name="com.example.musio.ui.fragment.SongFragment"
+        android:label="SongFragment"
+        tools:layout="@layout/fragment_song_player"/>
+
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.example.musio.ui.fragment.AlbumFragment"
+        android:label="AlbumFragment"
+        tools:layout="@layout/fragment_albums">
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.musio.ui.fragment.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_find_new_song">
+    </fragment>
+
+    <!-- Global action -->
+    <action
+        android:id="@+id/global_action_to_song_fragment"
+        app:destination="@id/songFragment"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left">
+        <argument
+            android:name="util_bool"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </action>
+
+</navigation>

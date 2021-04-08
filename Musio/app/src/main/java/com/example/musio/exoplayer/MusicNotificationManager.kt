@@ -8,6 +8,7 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.imageLoader
 import coil.request.ImageRequest
+
 import com.example.musio.R
 import com.example.musio.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.musio.other.Constants.NOTIFICATION_ID
@@ -20,6 +21,7 @@ class MusicNotificationManager(
         notificationListener: PlayerNotificationManager.NotificationListener,
         private val newSongCallback: () -> Unit
 ) {
+
     private val notificationManager: PlayerNotificationManager
 
     init {
@@ -33,8 +35,9 @@ class MusicNotificationManager(
                 DescriptionAdapter(mediaController),
                 notificationListener
         ).apply {
-            // set icon in Status bar
-            setSmallIcon(R.drawable.ic_player)
+            setSmallIcon(R.drawable.ic_music)
+            // special token with our media session to show player in notification
+            // gives media controls such as play/pause/seek/skip
             setMediaSessionToken(sessionToken)
         }
     }
@@ -48,6 +51,7 @@ class MusicNotificationManager(
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): CharSequence {
+            newSongCallback()
             return mediaController.metadata.description.title.toString()
         }
 
@@ -72,6 +76,5 @@ class MusicNotificationManager(
 
             return null
         }
-
     }
 }

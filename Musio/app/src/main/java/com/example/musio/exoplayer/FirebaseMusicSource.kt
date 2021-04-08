@@ -99,7 +99,6 @@ class FirebaseMusicSource(private val musicDatabase: MusicDatabase) {
             true
         }
     }
-
 }
 
 enum class State {
